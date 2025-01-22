@@ -2,8 +2,6 @@ const { Client } = require("pg");
 require('dotenv').config();
 
 const query = async (queryObject) => {
-  console.log('queryObject', queryObject);
-
   const client = new Client({
     host: process.env.POSTGRES_HOST,
     port: process.env.POSTGRES_PORT,
