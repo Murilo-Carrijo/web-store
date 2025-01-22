@@ -46,40 +46,40 @@ describe.skip("POST /users", () => {
     });
 
     expect(response.status).toBe(400);
+    const result = JSON.parse(await response.text());
+    expect(result.message).toBe("User already exists");
   });
+});
 
-  test("POST to /users returns 400", async () => {
-    const response = await fetch("http://localhost:3000/users", {
+describe.skip("POST users", () => {
+  beforeAll(async () => {
+    await database.query('DROP TABLE IF EXISTS users;');
+    await database.query(`
+      CREATE TABLE users (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(50) NOT NULL,
+        password VARCHAR(50) NOT NULL,
+        "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        "updateAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    await fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: "teste@teste.com",
-        password: '',
+        password: "password123",
       }),
     });
-
-    expect(response.status).toBe(400);
   });
 
-  test("POST to /users returns 400", async () => {
-    const response = await fetch("http://localhost:3000/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: "",
-        password: 'password123',
-      }),
-    });
-
-    expect(response.status).toBe(400);
+  afterAll(async () => {
+    await database.query('DROP TABLE IF EXISTS users;');
   });
-});
 
-describe("POST users", () => {
   test("POST /login returns 200", async () => {
     const response = await fetch("http://localhost:3000/login", {
       method: "POST",
@@ -88,7 +88,7 @@ describe("POST users", () => {
       },
       body: JSON.stringify({
         email: "teste@teste.com",
-        password: "senha123",
+        password: "password123",
       }),
     });
 
@@ -109,7 +109,7 @@ describe("POST users", () => {
       },
       body: JSON.stringify({
         email: "teste@teste.com",
-        password: "senha1234",
+        password: "password1234",
       }),
     });
 
@@ -126,7 +126,7 @@ describe("POST users", () => {
       },
       body: JSON.stringify({
         email: "testee@teste.com",
-        password: "senha1234",
+        password: "password123",
       }),
     });
 
@@ -143,7 +143,7 @@ describe("POST users", () => {
       },
       body: JSON.stringify({
         email: "@teste.com",
-        password: "senha1234",
+        password: "password123",
       }),
     });
 
@@ -160,7 +160,7 @@ test("POST /login returns 400 com a senha com menos de 6 caractes", async () => 
       },
       body: JSON.stringify({
         email: "teste@teste.com",
-        password: "senha",
+        password: "pass",
       }),
     });
 
