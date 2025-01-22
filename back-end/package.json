@@ -8,7 +8,9 @@
     "dev": "npm run service:up && nodemon index.js",
     "service:up": "docker compose -f infra/compose.yaml up -d",
     "service:stop": "docker compose -f infra/compose.yaml stop",
-    "service:down": "docker compose -f infra/compose.yaml down"
+    "service:down": "docker compose -f infra/compose.yaml down",
+    "test": "jest",
+    "test:watch": "jest --watchAll"
   },
   "keywords": [],
   "author": "",
