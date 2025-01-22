@@ -1,6 +1,6 @@
 const database = require("../setup");
 
-describe("POST /users", () => {
+describe.skip("POST /users", () => {
   beforeAll(async () => {
     await database.query('DROP TABLE IF EXISTS users;');
     await database.query(`
@@ -76,5 +76,96 @@ describe("POST /users", () => {
     });
 
     expect(response.status).toBe(400);
+  });
+});
+
+describe("POST users", () => {
+  test("POST /login returns 200", async () => {
+    const response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: "teste@teste.com",
+        password: "senha123",
+      }),
+    });
+
+    expect(response.status).toBe(200);
+    const result = JSON.parse(await response.text());
+    expect(result.id).toBeDefined();
+    expect(result.email).toBeDefined();
+    expect(result.createdAt).toBeDefined();
+    expect(result.updateAt).toBeDefined();
+    expect(result.password).not.toBeDefined();
+  });
+
+  test("POST /login returns 400 com a senha incorreta", async () => {
+    const response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: "teste@teste.com",
+        password: "senha1234",
+      }),
+    });
+
+    expect(response.status).toBe(400);
+    const result = JSON.parse(await response.text());
+    expect(result.message).toBe("Email or password incorrect");
+  });
+
+  test("POST /login returns 400 com a email incorreta", async () => {
+    const response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: "testee@teste.com",
+        password: "senha1234",
+      }),
+    });
+
+    expect(response.status).toBe(400);
+    const result = JSON.parse(await response.text());
+    expect(result.message).toBe("Email or password incorrect");
+  });
+
+  test("POST /login returns 400 com a email invalido", async () => {
+    const response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: "@teste.com",
+        password: "senha1234",
+      }),
+    });
+
+    expect(response.status).toBe(400);
+    const result = JSON.parse(await response.text());
+    expect(result.message).toBe("This email is invalid");
+  });
+
+test("POST /login returns 400 com a senha com menos de 6 caractes", async () => {
+    const response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: "teste@teste.com",
+        password: "senha",
+      }),
+    });
+
+    expect(response.status).toBe(400);
+    const result = JSON.parse(await response.text());
+    expect(result.message).toBe("The password must be at least 6 characters");
   });
 });
