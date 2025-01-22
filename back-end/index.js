@@ -13,10 +13,7 @@ app.use(express.json());
 
 app.get("/status", statusController);
 app.post("/users", usersController.createUser);
-app.get("/users", async (req, res) => {
-  const getAllUsers = await database.query("SELECT * FROM users");
-  return res.status(200).json(getAllUsers.rows);
-});
+app.post("/login", usersController.login);
 
 app.listen(port, (err) => {
   if (err) throw err;

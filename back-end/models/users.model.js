@@ -16,7 +16,16 @@ const getByEmail = async (email) => {
   return dbResponse.rows[0];
 };
 
+const login = async (email, password) => {
+  const dbResponse = await database.query({
+    text: "SELECT * FROM users WHERE email = $1 AND password = $2;",
+    values: [email, password],
+  });
+  return dbResponse.rows[0];
+};
+
 module.exports = {
   createUser,
   getByEmail,
+  login
 };
