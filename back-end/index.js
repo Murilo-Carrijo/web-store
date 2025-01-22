@@ -12,7 +12,7 @@ const database = require("./infra/database");
 app.use(express.json());
 
 app.get("/status", statusController);
-app.post("/users", usersController.createUser);
+app.post("/user/create", usersController.createUser);
 app.post("/login", usersController.login);
 
 app.listen(port, (err) => {
