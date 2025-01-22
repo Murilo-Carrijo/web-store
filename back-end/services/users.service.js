@@ -4,14 +4,15 @@ const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
 
 const createUser = async ({ email, password }) => {
   try {
-    if (!email || !password) {
+    if (!email || email.length === 0 || !password || password.length === 0) {
       throw new Error("Missing parameters");
     }
+    const checkEmail = emailRegex.test(email);
+    if (!checkEmail) throw new Error("This email is invalid");
     const user = await userModel.getByEmail(email);
+    if (password.length < 6) throw new Error("The password must be at least 6 characters");
 
-    if (user) {
-      throw new Error("User already exists");
-    }
+    if (user) throw new Error("User already exists");
 
     const passwordCrypto = crypto.createHash('md5').update(password).digest('hex');
     return await userModel.createUser(email, passwordCrypto);
