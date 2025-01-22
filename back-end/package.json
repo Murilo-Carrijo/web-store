@@ -10,7 +10,9 @@
     "service:stop": "docker compose -f infra/compose.yaml stop",
     "service:down": "docker compose -f infra/compose.yaml down",
     "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "migration:create": "node-pg-migrate -m infra/migrations create",
+    "migration:up": "node-pg-migrate -m infra/migrations up"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jest": "^29.6.2",
+    "node-pg-migrate": "^6.2.2",
     "pg": "^8.13.1"
   },
   "devDependencies": {
