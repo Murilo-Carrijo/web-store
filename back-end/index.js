@@ -7,13 +7,14 @@ const app = express();
 const port = process.env.PORT || 3000;
 const statusController = require("./controllers/status.controller");
 const usersController = require("./controllers/users.controller");
-const database = require("./infra/database");
+const favoritesController = require("./controllers/favorites.controller");
 
 app.use(express.json());
 
 app.get("/status", statusController);
 app.post("/user/create", usersController.createUser);
 app.post("/login", usersController.login);
+app.post("/favorites", favoritesController.createFavorites);
 
 app.listen(port, (err) => {
   if (err) throw err;
