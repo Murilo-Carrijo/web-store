@@ -2,7 +2,7 @@ const userModel = require("../models/users.model");
 const crypto = require('crypto');
 const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
 
-const createUser = async ({ email, password }) => {
+const createUser = async ({ email, password, name }) => {
   try {
     if (!email || email.length === 0 || !password || password.length === 0) {
       throw new Error("Missing parameters");
@@ -15,7 +15,7 @@ const createUser = async ({ email, password }) => {
     if (user) throw new Error("User already exists");
 
     const passwordCrypto = crypto.createHash('md5').update(password).digest('hex');
-    return await userModel.createUser(email, passwordCrypto);
+    return await userModel.createUser(email, passwordCrypto, name);
   } catch (error) {
     throw new Error(error.message);
   }

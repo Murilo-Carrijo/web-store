@@ -1,9 +1,9 @@
 const database = require("../infra/database");
 
-const createUser = async (email, password) => {
+const createUser = async (email, password, name) => {
   const dbResponse = await database.query({
-    text: "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *;",
-    values: [email, password],
+    text: "INSERT INTO users (email, password, name) VALUES ($1, $2, $3) RETURNING *;",
+    values: [email, password, name],
   });
   return dbResponse.rows[0];
 };
