@@ -8,7 +8,7 @@ describe("POST /user/create", () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        nome: "teste",
+        name: "teste",
         email: "teste@teste.com",
         password: '',
       }),
@@ -26,7 +26,7 @@ describe("POST /user/create", () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        nome: "teste",
+        name: "teste",
         email: "teste@teste.com",
         password: 'pass',
       }),
@@ -44,7 +44,7 @@ describe("POST /user/create", () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        nome: "teste",
+        name: "teste",
         email: "",
         password: 'password123',
       }),
@@ -55,14 +55,14 @@ describe("POST /user/create", () => {
     expect(result.message).toBe("Missing parameters");
   });
 
-  test("POST to /user/create returns 400 se o usuário não enviar o nome", async () => {
+  test("POST to /user/create returns 400 se o usuário não enviar o name", async () => {
     const response = await fetch("http://localhost:3000/user/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        nome: "  ",
+        name: "  ",
         email: "teste@teste.com",
         password: "password123",
       }),
@@ -80,7 +80,7 @@ describe("POST /user/create", () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        nome: "teste",
+        name: "teste",
         email: "teste@teste.com",
         password: "password123",
       }),
