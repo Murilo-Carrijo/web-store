@@ -5,12 +5,12 @@ exports.shorthands = undefined;
 exports.up = pgm => {
   pgm.createTable('favorites', {
     id: 'id',
-    externalId: { type: 'varchar(50)', notNull: true },
-    title: { type: 'varchar(50)', notNull: true },
-    price: { type: 'varchar(50)', notNull: true },
-    category: { type: 'varchar(50)', notNull: true },
+    externalId: { type: 'varchar(100)', notNull: true },
+    title: { type: 'varchar(100)', notNull: true },
+    price: { type: 'varchar(100)', notNull: true },
+    category: { type: 'varchar(100)', notNull: true },
     description: { type: 'varchar(1000)', notNull: true },
-    image: { type: 'varchar(50)', notNull: true },
+    image: { type: 'varchar(1000)', notNull: true },
     userId: {
       type: 'integer',
       notNull: true,
@@ -29,6 +29,10 @@ exports.up = pgm => {
     },
   });
   pgm.createIndex('favorites', 'userId');
+
+  pgm.addConstraint('favorites', 'unique_user_favorite', {
+    unique: ['userId', 'externalId'],
+  });
 };
 
 exports.down = pgm => {};
