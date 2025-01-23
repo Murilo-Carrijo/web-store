@@ -1,6 +1,6 @@
 const database = require("../setup");
 
-describe.skip("POST /user/create", () => {
+describe("POST /user/create", () => {
   test("POST to /user/create returns 400 senha vazia", async () => {
     const response = await fetch("http://localhost:3000/user/create", {
       method: "POST",
@@ -8,6 +8,7 @@ describe.skip("POST /user/create", () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        nome: "teste",
         email: "teste@teste.com",
         password: '',
       }),
@@ -25,6 +26,7 @@ describe.skip("POST /user/create", () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        nome: "teste",
         email: "teste@teste.com",
         password: 'pass',
       }),
@@ -42,6 +44,7 @@ describe.skip("POST /user/create", () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        nome: "teste",
         email: "",
         password: 'password123',
       }),
@@ -52,21 +55,22 @@ describe.skip("POST /user/create", () => {
     expect(result.message).toBe("Missing parameters");
   });
 
-  test("POST to /user/create returns 400 e-mail invalido", async () => {
+  test("POST to /user/create returns 400 se o usuário não enviar o nome", async () => {
     const response = await fetch("http://localhost:3000/user/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: "@teste.com",
-        password: 'password123',
+        nome: "  ",
+        email: "teste@teste.com",
+        password: "password123",
       }),
     });
 
     expect(response.status).toBe(400);
     const result = JSON.parse(await response.text());
-    expect(result.message).toBe("This email is invalid");
+    expect(result.message).toBe("Missing parameters");
   });
 
   test("POST to /user/create returns 400 se o usuário já existir", async () => {
@@ -76,6 +80,7 @@ describe.skip("POST /user/create", () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        nome: "teste",
         email: "teste@teste.com",
         password: "password123",
       }),
