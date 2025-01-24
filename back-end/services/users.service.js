@@ -1,5 +1,6 @@
 const userModel = require("../models/users.model");
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
 
 const createUser = async ({ email, password, name }) => {
@@ -37,12 +38,18 @@ const login = async (body) => {
   const user = await userModel.login(email, passwordCrypto);
   if (!user) throw new Error("Email or password incorrect");
 
-  return {
+  const payload = {
     id: user.id,
     email: user.email,
-    createdAt: user.createdAt,
-    updateAt: user.updateAt
+    name: user.name
   };
+
+  const secret = process.env.SECRET_KEY;
+
+  const token = jwt.sign(payload, secret, { expiresIn: '24h' });
+
+
+  return token;
 };
 
 module.exports = {
