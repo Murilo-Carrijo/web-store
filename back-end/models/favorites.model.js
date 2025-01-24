@@ -1,6 +1,6 @@
 const database = require("../infra/database");
 
-const createFavorites = async (values) => {
+const createFavorites = async ({values, userId}) => {
   const queryText = `
     INSERT INTO favorites (
       "externalId",
@@ -15,7 +15,7 @@ const createFavorites = async (values) => {
     );
   `;
 
-  const { externalId, title, price, category, description, image, userId } = values;
+  const { externalId, title, price, category, description, image } = values;
   const dbResponse = await database.query({
     text: queryText,
     values: [externalId, title, price, category, description, image, userId],

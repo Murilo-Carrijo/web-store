@@ -8,14 +8,15 @@ const port = process.env.PORT || 3000;
 const statusController = require("./controllers/status.controller");
 const usersController = require("./controllers/users.controller");
 const favoritesController = require("./controllers/favorites.controller");
+const authenticateToken = require("./middleware/authorizarion");
 
 app.use(express.json());
 
 app.get("/status", statusController);
 app.post("/user/create", usersController.createUser);
 app.post("/login", usersController.login);
-app.post("/favorites", favoritesController.createFavorites);
-app.get("/favorites/:userId", favoritesController.getFavoritesByUserId);
+app.post("/favorites", authenticateToken, favoritesController.createFavorites);
+app.get("/favorites", authenticateToken, favoritesController.getFavoritesByUserId);
 
 app.listen(port, (err) => {
   if (err) throw err;
