@@ -35,7 +35,22 @@ const getFavoritesByUserId = async (userId) => {
   return dbResponse.rows;
 };
 
+const deleteAllFavoritesByUserId = async (userId) => {
+  const queryText = `
+    DELETE FROM favorites WHERE "userId" = $1;
+  `;
+
+  await database.query({
+    text: queryText,
+    values: [userId],
+  });
+
+  return [];
+};
+
+
 module.exports = {
   createFavorites,
-  getFavoritesByUserId
+  getFavoritesByUserId,
+  deleteAllFavoritesByUserId
 }

@@ -13,10 +13,13 @@ const authenticateToken = require("./middleware/authorizarion");
 app.use(express.json());
 
 app.get("/status", statusController);
+
 app.post("/user/create", usersController.createUser);
 app.post("/login", usersController.login);
+
 app.post("/favorites", authenticateToken, favoritesController.createFavorites);
 app.get("/favorites", authenticateToken, favoritesController.getFavoritesByUserId);
+app.delete("/favorites", authenticateToken, favoritesController.deleteAllFavoritesByUserId);
 
 app.listen(port, (err) => {
   if (err) throw err;
