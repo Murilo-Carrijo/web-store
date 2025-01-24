@@ -16,6 +16,7 @@ app.get("/status", statusController);
 
 app.post("/user/create", usersController.createUser);
 app.post("/login", usersController.login);
+app.delete("/user/delete", authenticateToken, usersController.deleteUserById);
 
 app.post("/favorites", authenticateToken, favoritesController.createFavorites);
 app.get("/favorites", authenticateToken, favoritesController.getFavoritesByUserId);

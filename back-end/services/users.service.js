@@ -52,7 +52,14 @@ const login = async (body) => {
   return token;
 };
 
+const deleteUserById = async (id) => {
+  const user = await userModel.deleteUserById(id);
+  if (!user) throw new Error("User not found");
+  return user;
+};
+
 module.exports = {
   createUser,
-  login
+  login,
+  deleteUserById
 };

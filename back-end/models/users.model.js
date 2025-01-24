@@ -1,4 +1,5 @@
 const database = require("../infra/database");
+const favoritesModel = require("./favorites.model");
 
 const createUser = async (email, password, name) => {
   const dbResponse = await database.query({
@@ -24,8 +25,19 @@ const login = async (email, password) => {
   return dbResponse.rows[0];
 };
 
+const deleteUserById = async (id) => {
+  favoritesModel.deleteAllFavoritesByUserId(id);
+  await database.query({
+    text: "DELETE FROM users WHERE id = $1;",
+    values: [id],
+  });
+
+  return true;
+};
+
 module.exports = {
   createUser,
   getByEmail,
-  login
+  login,
+  deleteUserById
 };
