@@ -1,5 +1,3 @@
-const database = require("../setup");
-
 describe("POST /favorites", () => {
   test("POST to /favorites returns 400 title is required", async () => {
     const response = await fetch("http://localhost:3000/favorites", {
@@ -174,6 +172,29 @@ describe("POST /favorites", () => {
 
     expect(response.status).toBe(400);
     const result = JSON.parse(await response.text());
-    expect(result.message).toBe("The userId is missing parameters");
+    expect(result.message).toBe("The user already has 5 favorites");
+  });
+
+  test("POST to /favorites returns 400 if the element alrady exist", async () => {
+    const response = await fetch("http://localhost:3000/favorites", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        externalId: '2',
+        title: 'title',
+        price: '50.0',
+        category: 'papelaria',
+        description: 'descrição',
+        image: 'https://img.freepik.com/fotos-gratis/caderno_74190-4422.jpg',
+        userId: 1,
+      }),
+    });
+
+    expect(response.status).toBe(400);
+     const result = JSON.parse(await response.text());
+     console.log('result', result);
+    expect(result.message).toBe("The element already exist");
   });
 });
