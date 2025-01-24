@@ -23,6 +23,19 @@ const createFavorites = async (values) => {
   return dbResponse.rows[0];
 };
 
+const getFavoritesByUserId = async (userId) => {
+  const queryText = `
+    SELECT * FROM favorites WHERE "userId" = $1;
+  `;
+
+  const dbResponse = await database.query({
+    text: queryText,
+    values: [userId],
+  });
+  return dbResponse.rows;
+};
+
 module.exports = {
-  createFavorites
+  createFavorites,
+  getFavoritesByUserId
 }

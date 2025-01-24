@@ -11,6 +11,11 @@ const createFavorites = async (values) => {
   return await favoritesModel.createFavorites(values);
 };
 
+const getFavoritesByUserId = (userId) => {
+  return favoritesModel.getFavoritesByUserId(userId);
+};
+
 module.exports = {
-  createFavorites
+  createFavorites,
+  getFavoritesByUserId
 };

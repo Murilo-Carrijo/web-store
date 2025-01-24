@@ -15,6 +15,7 @@ app.get("/status", statusController);
 app.post("/user/create", usersController.createUser);
 app.post("/login", usersController.login);
 app.post("/favorites", favoritesController.createFavorites);
+app.get("/favorites/:userId", favoritesController.getFavoritesByUserId);
 
 app.listen(port, (err) => {
   if (err) throw err;
