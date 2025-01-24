@@ -48,9 +48,24 @@ const deleteAllFavoritesByUserId = async (userId) => {
   return [];
 };
 
+const deleteByFavoriteId = async (userId, favoriteId) => {
+  const queryText = `
+    DELETE FROM favorites WHERE "userId" = $1 AND "id" = $2;
+  `;
+
+  await database.query({
+    text: queryText,
+    values: [userId, favoriteId],
+  });
+
+  const otherFavorites = await getFavoritesByUserId(userId);
+
+  return otherFavorites;
+};
 
 module.exports = {
   createFavorites,
   getFavoritesByUserId,
-  deleteAllFavoritesByUserId
+  deleteAllFavoritesByUserId,
+  deleteByFavoriteId
 }

@@ -30,8 +30,20 @@ const deleteAllFavoritesByUserId = async (req, res) => {
   }
 };
 
+const deleteByFavoriteId = async (req, res) => {
+  try {
+    const user = req.user;
+    const favoriteId = Number(req.params.id);
+    await favoritesService.deleteByFavoriteId(user.id, favoriteId);
+    return res.status(200).json({ message: "Favorite deleted"});
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createFavorites,
   getFavoritesByUserId,
-  deleteAllFavoritesByUserId
+  deleteAllFavoritesByUserId,
+  deleteByFavoriteId
 };

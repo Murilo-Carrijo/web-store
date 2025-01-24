@@ -34,8 +34,21 @@ const deleteAllFavoritesByUserId = async (userId) => {
   return await favoritesModel.deleteAllFavoritesByUserId(userId);
 };
 
+const deleteByFavoriteId = async (userId, favoriteId) => {
+  const favoriteList = await favoritesModel.getFavoritesByUserId(userId);
+
+  if (favoriteList.length === 0) throw new Error('The user does not have favorites');
+
+  const favorite = favoriteList.find(favorite => favorite.id === favoriteId);
+
+  if (!favorite) throw new Error('The favorite does not exist');
+
+  return await favoritesModel.deleteByFavoriteId(userId, favoriteId);
+};
+
 module.exports = {
   createFavorites,
   getFavoritesByUserId,
-  deleteAllFavoritesByUserId
+  deleteAllFavoritesByUserId,
+  deleteByFavoriteId
 };

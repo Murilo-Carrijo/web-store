@@ -20,6 +20,7 @@ app.post("/login", usersController.login);
 app.post("/favorites", authenticateToken, favoritesController.createFavorites);
 app.get("/favorites", authenticateToken, favoritesController.getFavoritesByUserId);
 app.delete("/favorites", authenticateToken, favoritesController.deleteAllFavoritesByUserId);
+app.delete("/favorites/:id", authenticateToken, favoritesController.deleteByFavoriteId);
 
 app.listen(port, (err) => {
   if (err) throw err;
