@@ -4,11 +4,12 @@ import { useState } from 'react';
 function NavBar() {
   const [currentUrl, _setCurrentUrl] = useState(window.location.pathname);
   return (
-    <nav>
+    <nav className='navbar navbar-light'>
+      <div>Web Store</div>
       {currentUrl === '/' ? (
-        <NavLink to="/favorites">Favoritos</NavLink>
+        <NavLink className='navbar-brand' to="/favorites">Favoritos</NavLink>
       ) : (
-        <NavLink to="/">Home</NavLink>
+        <NavLink className='navbar-brand' to="/">Home</NavLink>
       )}
     </nav>
   )
