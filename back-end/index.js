@@ -9,8 +9,10 @@ const statusController = require("./controllers/status.controller");
 const usersController = require("./controllers/users.controller");
 const favoritesController = require("./controllers/favorites.controller");
 const authenticateToken = require("./middleware/authorizarion");
+const cors = require("cors");
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/status", statusController);
 
