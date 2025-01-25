@@ -8,7 +8,7 @@ import Loading from "../../components/loading";
 const Home = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    async function fetchProducts() {
+     const fetchProducts = async () => {
       const products = await getAllProducts();
       setProducts(products);
     }
@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div>
       <NavBar />
-      <div style={{ border: '2px solid black', height: '100%' }}>
+      <div style={{ height: '100%' }}>
         <h1>Home page</h1>
         {products.length === 0 && Array.from({ length: 20 }).map((_, i) => <Loading  key={i} />)}
         <CardContainer products={products} />
