@@ -1,6 +1,6 @@
 import NavBar from "../../components/nav-bar";
 
-function Favorites() {
+const Favorites = () => {
   return (
     <div>
       <NavBar />

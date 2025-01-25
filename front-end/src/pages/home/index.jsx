@@ -4,7 +4,7 @@ import { getAllProducts } from "../../services/products_services";
 import NavBar from "../../components/nav-bar";
 import CardContainer from "../../components/card-container";
 
-function Home() {
+const Home = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     async function fetchProducts() {

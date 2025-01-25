@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 
-function NavBar() {
+const NavBar = () => {
   const [currentUrl, _setCurrentUrl] = useState(window.location.pathname);
   return (
     <nav className='navbar navbar-light'>

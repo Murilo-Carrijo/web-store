@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 const Card = ({ product }) => {
   return (
     <div key={product.id} className="card" style={{ display: 'inline-block', margin: '10px', width: '300px' }}>
