@@ -1,5 +1,8 @@
 import { NavLink } from 'react-router-dom';
-const Card = ({ product }) => {
+const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
+  const userIsLogged = () => {
+    setOpenLoginForm(!openLoginForm);
+  };
   return (
     <div key={product.id} className="card" style={{ display: 'inline-block', margin: '10px', width: '300px' }}>
       <img
@@ -35,7 +38,7 @@ const Card = ({ product }) => {
             Mais detalhes
           </NavLink>
           <button style={{ all: 'unset' }}>
-            <i className="fa-solid fa-star" style={{color:  "#fbb913"}}></i>
+            <i className="fa-solid fa-star" style={{color:  "#fbb913"}} onClick={userIsLogged}></i>
           </button>
         </div>
       </div>
