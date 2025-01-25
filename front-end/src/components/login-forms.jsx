@@ -1,7 +1,21 @@
 import React, { useState } from 'react';
 import './login-forms.css';
+import { authenticate } from '../services/user_services';
 
 const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const makeLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const token = await authenticate(email, password);
+      document.cookie = `token=${token}`;
+      console.log(token);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const closeModal = () => {
     setOpenLoginForm(!openLoginForm);
   };
@@ -15,13 +29,25 @@ const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
         <form className="login-form">
           <div className="input-group">
             <label>Email:</label>
-            <input type="email" required />
+            <input
+              type="email"
+              onChange={e => setEmail(e.target.value)}
+              required
+            />
           </div>
           <div className="input-group">
             <label>Password:</label>
-            <input type="password" required />
+            <input
+              type="password"
+              onChange={e => setPassword(e.target.value)}
+              required />
           </div>
-          <button type="submit" className="login-button">Login</button>
+          <button
+            type="submit"
+            onClick={makeLogin}
+            className="login-button">
+            Login
+          </button>
         </form>
       </div>
     </div>
