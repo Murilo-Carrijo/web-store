@@ -231,8 +231,8 @@ describe("POST /favorites", () => {
         "Authorization": `Bearer ${token}`
       }
     });
-    await fetch("http://localhost:3000/delete", {
-      method: "POST",
+    await fetch("http://localhost:3000/user/delete", {
+      method: "DELETE",
       headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`
