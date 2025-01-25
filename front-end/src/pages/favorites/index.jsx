@@ -1,6 +1,11 @@
+import NavBar from "../../components/nav-bar";
+
 function Favorites() {
   return (
-    <h1>Favorites page</h1>
+    <div>
+      <NavBar />
+      <h1>Favorites page</h1>
+    </div>
   )
 }
 
