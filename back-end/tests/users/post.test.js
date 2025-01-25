@@ -86,9 +86,9 @@ describe("POST /user/create", () => {
       }),
     });
 
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(201);
     const result = JSON.parse(await response.text());
-    expect(result.message).toBe("User already exists");
+    expect(result.message).toBe("User created");
   });
 
   test("POST to /user/create returns 400 se o usuário já existir", async () => {
@@ -196,13 +196,27 @@ describe("POST users", () => {
     expect(response.status).toBe(400);
     const result = JSON.parse(await response.text());
     expect(result.message).toBe("The password must be at least 6 characters");
+  });
 
-    await fetch("http://localhost:3000/delete", {
-      method: "POST",
+  test("clean", async () => {
+    const fav = await fetch("http://localhost:3000/favorites", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    expect(fav.status).toBe(400);
+
+    const user = await fetch("http://localhost:3000/user/delete", {
+      method: "DELETE",
       headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`
       },
     });
-  });
+
+    expect(user.status).toBe(200);
+  })
 });
