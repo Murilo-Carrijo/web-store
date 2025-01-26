@@ -10,7 +10,7 @@
   justify-content: flex-end;
   border-radius: 10px;
   border: 2px solid #d8d2d2;
-  box-shadow: 2px 2px 5px black;
+  box-shadow: 1px 1px 15px rgb(63, 55, 55);
 }
 
 .image {

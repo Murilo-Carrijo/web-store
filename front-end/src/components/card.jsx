@@ -56,22 +56,26 @@ const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
           </p>
         </div>
         <div className="buttons-content">
-          <NavLink to={`/products/${product.id}`} className="btn btn-primary details-button" >
+          <NavLink
+            to={`/products/${product.externalId ? product.externalId : product.id}`}
+            className="btn btn-primary details-button"
+          >
             Mais detalhes
           </NavLink>
           <div className="icons-content" >
-            <button
-              style={{ all: 'unset' }}
-              onClick={() => setFavorite(product)}
-            >
-              <i className="fa-solid fa-star start" ></i>
-            </button>
-            {product.externalId && (
+            {product.externalId ? (
               <button
                 style={{ all: 'unset' }}
                 onClick={() => removeFromFavorites(product)}
               >
                 <i className="fa-regular fa-trash-can"></i>
+              </button>
+            ) : (
+              <button
+                style={{ all: 'unset' }}
+                onClick={() => setFavorite(product)}
+              >
+                <i className="fa-solid fa-star start" ></i>
               </button>
             )}
           </div>
