@@ -52,3 +52,21 @@ export const getFavorites = async (token) => {
 
   return response.json();
 };
+
+export const deleteByFavoriteId = async (token, id) => {
+  console.log('id:', id);
+
+  const response = await fetch(`http://localhost:3000/favorites/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      "Authorization": `Bearer ${token}`
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Error getting favorites');
+  }
+
+  return alert('Produto removido dos favoritos');
+};

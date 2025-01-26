@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { getCookie } from '../utils/cookies';
 import { decodeToken } from '../utils/token';
 import { addFavorites } from '../services/favorites_services';
+import { deleteByFavoriteId } from '../services/favorites_services';
 
 const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
   const validateToken = () => {
@@ -20,6 +21,12 @@ const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
   const setFavorite = async (product) => {
     const token = validateToken();
     await addFavorites(product, token);
+  };
+
+  const removeFromFavorites = async (product) => {
+    const token = getCookie('token');
+    await deleteByFavoriteId(token, product.id);
+    window.location.reload();
   };
 
   return (
@@ -56,12 +63,22 @@ const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
           <NavLink to={`/products/${product.id}`} className="btn btn-primary" style={{ color: 'white', height: "33.33%" }}>
             Mais detalhes
           </NavLink>
-          <button
-            style={{ all: 'unset' }}
-            onClick={() => setFavorite(product)}
-          >
-            <i className="fa-solid fa-star" style={{color:  "#fbb913"}} ></i>
-          </button>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button
+              style={{ all: 'unset' }}
+              onClick={() => setFavorite(product)}
+            >
+              <i className="fa-solid fa-star" style={{color:  "#fbb913"}} ></i>
+            </button>
+            {product.externalId && (
+              <button
+                style={{ all: 'unset' }}
+                onClick={() => removeFromFavorites(product)}
+              >
+                <i className="fa-regular fa-trash-can"></i>
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
