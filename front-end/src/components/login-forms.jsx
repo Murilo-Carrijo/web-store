@@ -13,6 +13,7 @@ const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
     try {
       const token = await authenticate(email, password);
       document.cookie = `token=${token.token}`;
+      window.location.reload();
       console.log(token);
     } catch (error) {
       setError(true);
