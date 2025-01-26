@@ -5,14 +5,17 @@ import { authenticate } from '../services/user_services';
 const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
   const makeLogin = async (e) => {
     e.preventDefault();
+    setError(false);
     try {
       const token = await authenticate(email, password);
-      document.cookie = `token=${token}`;
+      document.cookie = `token=${token.token}`;
       console.log(token);
     } catch (error) {
+      setError(true);
       console.error(error);
     }
   };
@@ -42,6 +45,11 @@ const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
               onChange={e => setPassword(e.target.value)}
               required />
           </div>
+            {error && (
+            <div className="error-message">
+              <p>Erro ao fazer login. Por favor, verifique suas credenciais e tente novamente.</p>
+            </div>
+            )}
           <button
             type="submit"
             onClick={makeLogin}
