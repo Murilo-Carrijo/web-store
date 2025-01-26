@@ -48,7 +48,6 @@ const RegisterForms = ({ openRegistrerForm, setOpenRegistrerForm }) => {
       setError({ field: "checkPass", message: "Senha deve ter no mínimo 6 caracteres.", render: true });
       return false;
     }
-    console.log('checkPass.length !== password', checkPass.length, password);
 
     if (checkPass !== password) {
       setError({ field: "checkPass", message: "A confirmação de senha deve ser igual a senha.", render: true });

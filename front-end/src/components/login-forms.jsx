@@ -14,7 +14,6 @@ const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
       const token = await authenticate(email, password);
       document.cookie = `token=${token.token}`;
       window.location.reload();
-      console.log(token);
     } catch (error) {
       setError(true);
       console.error(error);

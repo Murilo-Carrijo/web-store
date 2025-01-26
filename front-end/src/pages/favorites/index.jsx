@@ -17,17 +17,11 @@ const Favorites = ({
     setProducts(favorites);
   };
 
-  console.log('Products:', products);
-
-
   useEffect(() => {
     const cookieToken = getCookie('token');
     const fetchUser = async () => {
-      console.log('Token:', cookieToken);
       if (cookieToken) {
         const userInfos = decodeToken(cookieToken);
-        console.log('User:', userInfos);
-
         if (!userInfos) {
           setOpenLoginForm(true);
         }
