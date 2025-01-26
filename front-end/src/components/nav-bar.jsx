@@ -3,9 +3,6 @@ import { useState } from 'react';
 
 const NavBar = ({ user, setOpenLoginForm }) => {
   const [currentUrl, _setCurrentUrl] = useState(window.location.pathname);
-  console.log(user);
-
-
   const renderFavoritesElement = () => {
     if (user.isValid) {
       return <NavLink className='navbar-brand' to="/favorites">Favoritos</NavLink>;

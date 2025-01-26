@@ -13,8 +13,8 @@ const App = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const cookieToken = getCookie('token');
-      if (cookieToken && cookieToken.token) {
-        const userInfos = decodeToken(cookieToken.token);
+      if (cookieToken) {
+        const userInfos = decodeToken(cookieToken);
         setUser({
           ...userInfos,
           isValid: true
@@ -34,7 +34,7 @@ const App = () => {
         <Home openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} user={user} />
       } />
       <Route path="/favorites" element={
-        <Favorites openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} />
+        <Favorites openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} user={user} />
       } />
       <Route path="/products/:id" element={
         <Products openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} user={user} />

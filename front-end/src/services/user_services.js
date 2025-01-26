@@ -8,8 +8,6 @@ export const authenticate = async (email, password) => {
   });
 
   if (!response.ok) {
-    console.log('response', response);
-
     throw new Error('Error authenticating user');
   }
 
