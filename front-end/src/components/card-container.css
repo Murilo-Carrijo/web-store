@@ -1,0 +1,9 @@
+.card-container {
+  height: 92%;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: rgb(201, 255, 255);
+  border-radius: 10px;
+}
