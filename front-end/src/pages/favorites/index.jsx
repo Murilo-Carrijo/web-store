@@ -5,7 +5,8 @@ import Loading from "../../components/loading";
 import Card from "../../components/card";
 import { getCookie } from "../../utils/cookies";
 import { decodeToken } from "../../utils/token";
-import {  getFavorites  } from '../../services/favorites_services';
+import { getFavorites } from '../../services/favorites_services';
+import './favorites.css';
 
 const Favorites = ({
   openLoginForm, setOpenLoginForm, user, openRegistrerForm, setOpenRegistrerForm
@@ -42,8 +43,7 @@ const Favorites = ({
         setOpenRegistrerForm={setOpenRegistrerForm}
       />
       <LoginForm openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} />
-      <h1>Favorites page</h1>
-      <div style={{ height: '92%', margin: '10px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <div className="favorites">
         {!products && Array.from({ length: 5 }).map((_, i) => <Loading key={i} />)}
         {products.length === 0 && <h3>Sua lista de favoritos esta fazia.</h3>}
         {(products && products.length > 0) && products.map((product) => <Card key={product.id} product={product} openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} />)}
