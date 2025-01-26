@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
+import './nav-bar.css';
 
 const NavBar = ({
   user, setOpenLoginForm, setOpenRegistrerForm
@@ -9,14 +10,14 @@ const NavBar = ({
   const checkUser = () => {
     if (!user.isValid) {
       return (
-        <div style={{width: '25%', display: "flex", justifyContent: "end", alignItems: 'center'}}>
-          <button style={{ all: 'unset', display: "inline-block", paddingTop: "0.3125rem", marginRight: "1rem", fontSize: "1,25rem", lineHeight: "inherit", whiteSpace: "nowrap", color: "rgba(0,0,0,.9)"  }} onClick={() => setOpenLoginForm(true)} >Login</button>
-          <button style={{ all: 'unset', display: "inline-block", paddingTop: "0.3125rem", marginRight: "1rem", fontSize: "1,25rem", lineHeight: "inherit", whiteSpace: "nowrap", color: "rgba(0,0,0,.9)"  }} onClick={() => setOpenRegistrerForm(true)} >Registre-se</button>
+        <div className="nav-bar-buttons-content">
+          <button style={{ all: 'unset'}} className="nav-bar-buttons" onClick={() => setOpenLoginForm(true)} >Login</button>
+          <button style={{ all: 'unset'}} className="nav-bar-buttons" onClick={() => setOpenRegistrerForm(true)} >Registre-se</button>
         </div>
       )
     } else {
       return (
-        <div>
+        <div className="nav-bar-name">
           Olá, {user.name}
         </div>
       )
@@ -26,15 +27,15 @@ const NavBar = ({
   const renderFavoritesElement = () => {
     if (user.isValid) {
       return (
-        <div style={{width: '50%', display: "flex", justifyContent: "end", alignItems: 'center'}}>
-          <NavLink className='navbar-brand' to="/favorites">Favoritos</NavLink>
+        <div className="nav-content">
+          <NavLink className='nav-bar-links' to="/favorites">Favoritos</NavLink>
           {checkUser()}
         </div>
       );
     } else {
       return (
-        <div style={{width: '50%', display: "flex", justifyContent: "end", alignItems: 'center'}}>
-          <button className='navbar-brand' style={{ all: 'unset' }} onClick={() => setOpenLoginForm(true)}>Favoritos</button>
+        <div className="nav-content">
+          <button className='nav-bar-links' style={{ all: 'unset' }} onClick={() => setOpenLoginForm(true)}>Favoritos</button>
           {checkUser()}
         </div>
         );
@@ -48,22 +49,22 @@ const NavBar = ({
       break;
     case '/favorites':
       navLink = (
-        <div style={{width: '50%', display: "flex", justifyContent: "end", alignItems: 'center'}}>
-          <NavLink className='navbar-brand' to="/">Home</NavLink>
+        <div className="nav-content">
+          <NavLink className='nav-bar-links' to="/">Home</NavLink>
         </div>
       );
       break;
     default:
       navLink = (
-        <div style={{width: '50%', display: "flex", justifyContent: "end", alignItems: 'center'}}>
-          <NavLink className='navbar-brand' to="/">Home</NavLink>
-          <NavLink className='navbar-brand' to="/favorites">Favoritos</NavLink>
+        <div className="nav-content">
+          <NavLink className='nav-bar-links' to="/">Home</NavLink>
+          <NavLink className='nav-bar-links' to="/favorites">Favoritos</NavLink>
           {checkUser()}
         </div>
       );
   }
   return (
-    <nav className='navbar navbar-light'>
+    <nav className='nav-bar'>
       <div>Web Store</div>
       { navLink }
     </nav>
