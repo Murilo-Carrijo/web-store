@@ -1,8 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { getCookie } from '../utils/cookies';
 import { decodeToken } from '../utils/token';
-import { addFavorites } from '../services/favorites_services';
-import { deleteByFavoriteId } from '../services/favorites_services';
+import { addFavorites, checkFavorites, deleteByFavoriteId } from '../services/favorites_services';
 
 const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
   const validateToken = () => {
@@ -20,7 +19,14 @@ const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
 
   const setFavorite = async (product) => {
     const token = validateToken();
-    await addFavorites(product, token);
+    const checkFavoritList = await checkFavorites(token, product);
+    if (checkFavoritList.status === 'error') {
+      return alert(checkFavoritList.message);
+    } else {
+      const result = await addFavorites(product, token);
+      return alert(result.message);
+
+    }
   };
 
   const removeFromFavorites = async (product) => {
