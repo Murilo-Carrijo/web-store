@@ -8,7 +8,7 @@ import { decodeToken } from "../../utils/token";
 import {  getFavorites  } from '../../services/favorites_services';
 
 const Favorites = ({ openLoginForm, setOpenLoginForm }) => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(false);
 
   const fetchFavorites = async (token) => {
     const favorites = await getFavorites(token);
@@ -43,8 +43,9 @@ const Favorites = ({ openLoginForm, setOpenLoginForm }) => {
       <LoginForm openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} />
       <h1>Favorites page</h1>
       <div style={{ height: '92%', margin: '10px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-        {products.length === 0 && Array.from({ length: 5 }).map((_, i) => <Loading key={i} />)}
-        {products.map((product) => <Card key={product.id} product={product} openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} />)}
+        {!products && Array.from({ length: 5 }).map((_, i) => <Loading key={i} />)}
+        {products.length === 0 && <h3>Sua lista de favoritos esta fazia.</h3>}
+        {(products && products.length > 0) && products.map((product) => <Card key={product.id} product={product} openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} />)}
       </div>
     </div>
   )
