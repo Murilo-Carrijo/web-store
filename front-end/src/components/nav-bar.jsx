@@ -1,13 +1,23 @@
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 
-const NavBar = () => {
+const NavBar = ({ user, setOpenLoginForm }) => {
   const [currentUrl, _setCurrentUrl] = useState(window.location.pathname);
+  console.log(user);
+
+
+  const renderFavoritesElement = () => {
+    if (user.isValid) {
+      return <NavLink className='navbar-brand' to="/favorites">Favoritos</NavLink>;
+    } else {
+      return <button className='navbar-brand' style={{ all: 'unset' }} onClick={() => setOpenLoginForm(true)}>Favoritos</button>;
+    }
+  };
 
   let navLink;
   switch (currentUrl) {
     case '/':
-      navLink = <NavLink className='navbar-brand' to="/favorites">Favoritos</NavLink>;
+      navLink = renderFavoritesElement();
       break;
     case '/favorites':
       navLink = <NavLink className='navbar-brand' to="/">Home</NavLink>;
