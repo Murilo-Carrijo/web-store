@@ -22,7 +22,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
   width: 90%;
-  max-width: 400px;
+  max-width: 600px;
 }
 
 /* Close button */
@@ -46,7 +46,7 @@
 /* Input group styles */
 .input-group {
   margin-bottom: 1.5rem;
-  width: 100%;
+  width: 60%;
 }
 
 .input-group label {

@@ -11,8 +11,8 @@ const NavBar = ({
     if (!user.isValid) {
       return (
         <div className="nav-bar-buttons-content">
-          <button style={{ all: 'unset'}} className="nav-bar-buttons" onClick={() => setOpenLoginForm(true)} >Login</button>
-          <button style={{ all: 'unset'}} className="nav-bar-buttons" onClick={() => setOpenRegistrerForm(true)} >Registre-se</button>
+          <button style={{ all: 'unset'}} onClick={() => setOpenLoginForm(true)} >Login</button>
+          <button style={{ all: 'unset'}} onClick={() => setOpenRegistrerForm(true)} >Registre-se</button>
         </div>
       )
     } else {
@@ -51,6 +51,9 @@ const NavBar = ({
       navLink = (
         <div className="nav-content">
           <NavLink className='nav-bar-links' to="/">Home</NavLink>
+          <div className="nav-bar-name">
+            Olá, {user.name}
+          </div>
         </div>
       );
       break;
