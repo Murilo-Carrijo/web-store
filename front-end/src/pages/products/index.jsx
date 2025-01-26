@@ -4,8 +4,12 @@ import { getProductsById } from '../../services/products_services';
 
 import NavBar from "../../components/nav-bar";
 import ProductLoading from "../../components/loading-product";
+import LoginForm from "../../components/login-forms";
+import RegisterForms from "../../components/register-forms";
 
-const Products = () => {
+const Products = ({
+  openLoginForm, setOpenLoginForm, user, openRegistrerForm, setOpenRegistrerForm
+}) => {
   const location = useLocation();
   const productId = location.pathname.split('/')[2];
   const [product, setProduct] = useState(null);
@@ -19,7 +23,24 @@ const Products = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar
+        user={user}
+        setOpenLoginForm={setOpenLoginForm}
+        openRegistrerForm={openRegistrerForm}
+        setOpenRegistrerForm={setOpenRegistrerForm}
+      />
+      <LoginForm
+        openLoginForm={openLoginForm}
+        setOpenLoginForm={setOpenLoginForm}
+        openRegistrerForm={openRegistrerForm}
+        setOpenRegistrerForm={setOpenRegistrerForm}
+      />
+      <RegisterForms
+        openLoginForm={openLoginForm}
+        setOpenLoginForm={setOpenLoginForm}
+        openRegistrerForm={openRegistrerForm}
+        setOpenRegistrerForm={setOpenRegistrerForm}
+      />
       <div style={{ height: '100%' }}>
         <h1 style={{ textAlign: 'center' }}>Product page</h1>
         {product ? (

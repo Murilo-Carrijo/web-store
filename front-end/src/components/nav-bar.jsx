@@ -1,13 +1,27 @@
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 
-const NavBar = ({ user, setOpenLoginForm }) => {
+const NavBar = ({
+  user, setOpenLoginForm, setOpenRegistrerForm
+}) => {
   const [currentUrl, _setCurrentUrl] = useState(window.location.pathname);
   const renderFavoritesElement = () => {
     if (user.isValid) {
-      return <NavLink className='navbar-brand' to="/favorites">Favoritos</NavLink>;
+      return (
+        <div style={{width: '50%', display: "flex", justifyContent: "end", alignItems: 'center'}}>
+          <NavLink className='navbar-brand' to="/favorites">Favoritos</NavLink>
+          <button style={{ all: 'unset', display: "inline-block", paddingTop: "0.3125rem", marginRight: "1rem", fontSize: "1,25rem", lineHeight: "inherit", whiteSpace: "nowrap", color: "rgba(0,0,0,.9)"  }} onClick={() => setOpenLoginForm(true)} >Login</button>
+          <button style={{ all: 'unset', display: "inline-block", paddingTop: "0.3125rem", marginRight: "1rem", fontSize: "1,25rem", lineHeight: "inherit", whiteSpace: "nowrap", color: "rgba(0,0,0,.9)"  }} onClick={() => setOpenRegistrerForm(true)} >Registre-se</button>
+        </div>
+      );
     } else {
-      return <button className='navbar-brand' style={{ all: 'unset' }} onClick={() => setOpenLoginForm(true)}>Favoritos</button>;
+      return (
+        <div style={{width: '50%', display: "flex", justifyContent: "end", alignItems: 'center'}}>
+          <button className='navbar-brand' style={{ all: 'unset' }} onClick={() => setOpenLoginForm(true)}>Favoritos</button>
+          <button style={{ all: 'unset', display: "inline-block", paddingTop: "0.3125rem", marginRight: "1rem", fontSize: "1,25rem", lineHeight: "inherit", whiteSpace: "nowrap", color: "rgba(0,0,0,.9)"  }} onClick={() => setOpenLoginForm(true)} >Login</button>
+          <button style={{ all: 'unset', display: "inline-block", paddingTop: "0.3125rem", marginRight: "1rem", fontSize: "1,25rem", lineHeight: "inherit", whiteSpace: "nowrap", color: "rgba(0,0,0,.9)"  }} onClick={() => setOpenRegistrerForm(true)} >Registre-se</button>
+        </div>
+        );
     }
   };
 
@@ -17,13 +31,19 @@ const NavBar = ({ user, setOpenLoginForm }) => {
       navLink = renderFavoritesElement();
       break;
     case '/favorites':
-      navLink = <NavLink className='navbar-brand' to="/">Home</NavLink>;
+      navLink = (
+        <div style={{width: '50%', display: "flex", justifyContent: "end", alignItems: 'center'}}>
+          <NavLink className='navbar-brand' to="/">Home</NavLink>
+        </div>
+      );
       break;
     default:
       navLink = (
         <div style={{width: '50%', display: "flex", justifyContent: "end", alignItems: 'center'}}>
           <NavLink className='navbar-brand' to="/">Home</NavLink>
           <NavLink className='navbar-brand' to="/favorites">Favoritos</NavLink>
+          <button style={{ all: 'unset', display: "inline-block", paddingTop: "0.3125rem", marginRight: "1rem", fontSize: "1,25rem", lineHeight: "inherit", whiteSpace: "nowrap", color: "rgba(0,0,0,.9)"  }} onClick={() => setOpenLoginForm(true)} >Login</button>
+          <button style={{ all: 'unset', display: "inline-block", paddingTop: "0.3125rem", marginRight: "1rem", fontSize: "1,25rem", lineHeight: "inherit", whiteSpace: "nowrap", color: "rgba(0,0,0,.9)"  }} onClick={() => setOpenRegistrerForm(true)} >Registre-se</button>
         </div>
       );
   }

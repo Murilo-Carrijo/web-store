@@ -7,7 +7,9 @@ import { getCookie } from "../../utils/cookies";
 import { decodeToken } from "../../utils/token";
 import {  getFavorites  } from '../../services/favorites_services';
 
-const Favorites = ({ openLoginForm, setOpenLoginForm }) => {
+const Favorites = ({
+  openLoginForm, setOpenLoginForm, user, openRegistrerForm, setOpenRegistrerForm
+}) => {
   const [products, setProducts] = useState(false);
 
   const fetchFavorites = async (token) => {
@@ -39,7 +41,12 @@ const Favorites = ({ openLoginForm, setOpenLoginForm }) => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar
+        user={user}
+        setOpenLoginForm={setOpenLoginForm}
+        openRegistrerForm={openRegistrerForm}
+        setOpenRegistrerForm={setOpenRegistrerForm}
+      />
       <LoginForm openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} />
       <h1>Favorites page</h1>
       <div style={{ height: '92%', margin: '10px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>

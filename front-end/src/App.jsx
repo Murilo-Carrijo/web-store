@@ -9,6 +9,7 @@ import { decodeToken } from './utils/token';
 
 const App = () => {
   const [openLoginForm, setOpenLoginForm] = useState(false);
+  const [openRegistrerForm, setOpenRegistrerForm] = useState(false);
   const [user, setUser] = useState('');
   useEffect(() => {
     const fetchUser = async () => {
@@ -31,13 +32,31 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={
-        <Home openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} user={user} />
+        <Home
+          openLoginForm={openLoginForm}
+          setOpenLoginForm={setOpenLoginForm}
+          user={user}
+          openRegistrerForm={openRegistrerForm}
+          setOpenRegistrerForm={setOpenRegistrerForm}
+        />
       } />
       <Route path="/favorites" element={
-        <Favorites openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} user={user} />
+        <Favorites
+          openLoginForm={openLoginForm}
+          setOpenLoginForm={setOpenLoginForm}
+          user={user}
+          openRegistrerForm={openRegistrerForm}
+          setOpenRegistrerForm={setOpenRegistrerForm}
+        />
       } />
       <Route path="/products/:id" element={
-        <Products openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} user={user} />
+        <Products
+          openLoginForm={openLoginForm}
+          setOpenLoginForm={setOpenLoginForm}
+          user={user}
+          openRegistrerForm={openRegistrerForm}
+          setOpenRegistrerForm={setOpenRegistrerForm}
+        />
       } />
     </Routes>
   )
