@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './login-forms.css';
+import './register-forms.css';
 import { register } from '../services/user_services';
 
 const RegisterForms = ({ openRegistrerForm, setOpenRegistrerForm }) => {
