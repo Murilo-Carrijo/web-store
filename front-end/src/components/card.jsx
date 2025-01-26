@@ -13,6 +13,8 @@ const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
     if (!user) {
       setOpenLoginForm(!openLoginForm);
     }
+
+    window.location.assign(`${window.location.origin}/favorites`);
   };
 
   return (
