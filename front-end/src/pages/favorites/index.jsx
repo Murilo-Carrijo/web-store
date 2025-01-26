@@ -1,14 +1,26 @@
 import { useEffect, useState } from "react";
 import NavBar from "../../components/nav-bar";
 import LoginForm from "../../components/login-forms";
+import Loading from "../../components/loading";
+import Card from "../../components/card";
 import { getCookie } from "../../utils/cookies";
 import { decodeToken } from "../../utils/token";
+import {  getFavorites  } from '../../services/favorites_services';
 
 const Favorites = ({ openLoginForm, setOpenLoginForm }) => {
+  const [products, setProducts] = useState([]);
+
+  const fetchFavorites = async (token) => {
+    const favorites = await getFavorites(token);
+    setProducts(favorites);
+  };
+
+  console.log('Products:', products);
+
 
   useEffect(() => {
+    const cookieToken = getCookie('token');
     const fetchUser = async () => {
-      const cookieToken = getCookie('token');
       console.log('Token:', cookieToken);
       if (cookieToken) {
         const userInfos = decodeToken(cookieToken);
@@ -22,6 +34,7 @@ const Favorites = ({ openLoginForm, setOpenLoginForm }) => {
       }
     }
     fetchUser();
+    fetchFavorites(cookieToken);
   }, []);
 
   return (
@@ -29,6 +42,10 @@ const Favorites = ({ openLoginForm, setOpenLoginForm }) => {
       <NavBar />
       <LoginForm openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} />
       <h1>Favorites page</h1>
+      <div style={{ height: '92%', margin: '10px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+        {products.length === 0 && Array.from({ length: 5 }).map((_, i) => <Loading key={i} />)}
+        {products.map((product) => <Card key={product.id} product={product} openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} />)}
+      </div>
     </div>
   )
 }

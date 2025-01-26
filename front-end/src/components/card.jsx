@@ -49,7 +49,7 @@ const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
             {product.title}
           </h6>
           <p className="card-text" style={{ marginBottom: '8px', }}>
-            R$ {product.price.toFixed(2).replace('.', ',')}
+            R$ {Number(product.price).toFixed(2).replace('.', ',')}
           </p>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
