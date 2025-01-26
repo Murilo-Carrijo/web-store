@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import { getCookie } from '../utils/cookies';
 import { decodeToken } from '../utils/token';
+import { addFavorites } from '../services/favorites_services';
 
 const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
-  const setFavorite = () => {
+  const validateToken = () => {
     const token = getCookie('token');
     if (!token) {
       setOpenLoginForm(!openLoginForm);
@@ -13,8 +14,12 @@ const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
     if (!user) {
       setOpenLoginForm(!openLoginForm);
     }
+    return token
+  };
 
-    window.location.assign(`${window.location.origin}/favorites`);
+  const setFavorite = async (product) => {
+    const token = validateToken();
+    await addFavorites(product, token);
   };
 
   return (
@@ -51,8 +56,11 @@ const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
           <NavLink to={`/products/${product.id}`} className="btn btn-primary" style={{ color: 'white', height: "33.33%" }}>
             Mais detalhes
           </NavLink>
-          <button style={{ all: 'unset' }}>
-            <i className="fa-solid fa-star" style={{color:  "#fbb913"}} onClick={setFavorite}></i>
+          <button
+            style={{ all: 'unset' }}
+            onClick={() => setFavorite(product)}
+          >
+            <i className="fa-solid fa-star" style={{color:  "#fbb913"}} ></i>
           </button>
         </div>
       </div>
