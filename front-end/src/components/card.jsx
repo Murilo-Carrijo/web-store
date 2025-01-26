@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { getCookie } from '../utils/cookies';
 import { decodeToken } from '../utils/token';
 import { addFavorites, checkFavorites, deleteByFavoriteId } from '../services/favorites_services';
+import './card.css';
 
 const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
   const validateToken = () => {
@@ -36,45 +37,34 @@ const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
   };
 
   return (
-    <div key={product.id} className="card" style={{ display: 'inline-block', margin: '10px', width: '300px' }}>
+    <div key={product.id} className="product">
       <img
         src={product.image}
         alt={product.title}
-        style={{
-          height: '300px',
-          width: '100%',
-          objectFit: 'contain'
-        }}
+        className="image"
+        style={{ objectFit: "contain" }}
       />
       <div className="card-body">
-        <div style={{ textAlign: 'start', height: '33.33%' }}>
+        <div className="text-content">
           <h6
-            className="card-title"
-            style={{
-              fontWeight: "600",
-              fontSize: '16px',
-              marginBottom: '8px',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-            }}
+            className="card-title title"
             title={product.title}>
             {product.title}
           </h6>
-          <p className="card-text" style={{ marginBottom: '8px', }}>
+          <p className="price">
             R$ {Number(product.price).toFixed(2).replace('.', ',')}
           </p>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <NavLink to={`/products/${product.id}`} className="btn btn-primary" style={{ color: 'white', height: "33.33%" }}>
+        <div className="buttons-content">
+          <NavLink to={`/products/${product.id}`} className="btn btn-primary details-button" >
             Mais detalhes
           </NavLink>
-          <div style={{ display: 'flex', gap: '10px' }}>
+          <div className="icons-content" >
             <button
               style={{ all: 'unset' }}
               onClick={() => setFavorite(product)}
             >
-              <i className="fa-solid fa-star" style={{color:  "#fbb913"}} ></i>
+              <i className="fa-solid fa-star start" ></i>
             </button>
             {product.externalId && (
               <button
