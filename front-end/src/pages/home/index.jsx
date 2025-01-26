@@ -6,6 +6,8 @@ import CardContainer from "../../components/card-container";
 import Loading from "../../components/loading";
 import LoginForm from "../../components/login-forms";
 import RegisterForms from "../../components/register-forms";
+import './home.css';
+import Banner from '../../assets/bannerwebstore.png'
 
 const Home = ({
   openLoginForm, setOpenLoginForm, user, openRegistrerForm, setOpenRegistrerForm
@@ -39,8 +41,8 @@ const Home = ({
         openRegistrerForm={openRegistrerForm}
         setOpenRegistrerForm={setOpenRegistrerForm}
       />
-      <div style={{ height: '100%' }}>
-        <h1>Home page</h1>
+      <div className="home">
+        <img className="home-image" src={Banner} alt="" />
         {products.length === 0 && Array.from({ length: 20 }).map((_, i) => <Loading  key={i} />)}
         <CardContainer products={products} openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} />
       </div>
