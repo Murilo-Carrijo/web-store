@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './login-forms.css';
+import { register } from '../services/user_services';
 
 const RegisterForms = ({ openRegistrerForm, setOpenRegistrerForm }) => {
   const [name, setName] = useState('');
@@ -55,6 +56,19 @@ const RegisterForms = ({ openRegistrerForm, setOpenRegistrerForm }) => {
     }
     setError({ field: "checkPass", message: "", render: false });
     return true;
+  };
+
+  const registerUser = async () => {
+    if (!checkName(name) || !checkEmail(email) || !checkPassword(password) || !checkSecondPassword(_verifyPassword)) {
+      return;
+    }
+
+    try {
+      await register(name, email, password);
+      alert('Usuário cadastrado com sucesso!');
+    } catch (error) {
+      alert('Erro ao cadastrar usuário.');
+    }
   };
 
   return (
@@ -128,7 +142,7 @@ const RegisterForms = ({ openRegistrerForm, setOpenRegistrerForm }) => {
           </div>
           <button
             type="submit"
-            onClick={() => alert('Criar conta')}
+            onClick={registerUser}
             className="login-button">
             Criar conta
           </button>
