@@ -1,0 +1,32 @@
+.page {
+  height: 100%;
+  width: 80%;
+  padding-top: 100px;
+  margin: auto;
+}
+
+.product-card {
+  border: thick double rgb(77, 75, 75);
+  height: 92%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  width: 75%;
+  margin: auto;
+}
+
+.product-image {
+  margin-right: 20px;
+  height: 500px;
+  margin: 12px;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  text-align: start;
+  margin-left: 16px;
+}

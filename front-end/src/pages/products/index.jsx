@@ -6,6 +6,7 @@ import NavBar from "../../components/nav-bar";
 import ProductLoading from "../../components/loading-product";
 import LoginForm from "../../components/login-forms";
 import RegisterForms from "../../components/register-forms";
+import './product.css';
 
 const Products = ({
   openLoginForm, setOpenLoginForm, user, openRegistrerForm, setOpenRegistrerForm
@@ -41,12 +42,11 @@ const Products = ({
         openRegistrerForm={openRegistrerForm}
         setOpenRegistrerForm={setOpenRegistrerForm}
       />
-      <div style={{ height: '100%' }}>
-        <h1 style={{ textAlign: 'center' }}>Product page</h1>
+      <div className="page">
         {product ? (
-          <div style={{ border: '1px solid black', height: '92%', margin: '10px', display: 'flex', justifyContent: 'center' }}>
-            <img src={product.image} alt={product.title} style={{ marginRight: '20px', height: "500px", margin: "12px",objectFit: 'contain' }} />
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '50%', marginLeft: "16px", textAlign: "start" }}>
+          <div className="product-card" >
+            <img className="product-image" src={product.image} alt={product.title} style={{ objectFit: 'contain' }} />
+            <div className="text-container">
               <h2>{product.title}</h2>
               <p>{product.description}</p>
               <p>R$ {product.price.toFixed(2).replace('.', ',')}</p>
