@@ -3,7 +3,10 @@ import { useState } from 'react';
 import './nav-bar.css';
 
 const NavBar = ({
-  user, setOpenLoginForm, setOpenRegistrerForm
+  user,
+  setOpenLoginForm,
+  setOpenRegistrerForm,
+  setOpenLogout
 }) => {
   const [currentUrl, _setCurrentUrl] = useState(window.location.pathname);
 
@@ -18,6 +21,7 @@ const NavBar = ({
     } else {
       return (
         <div className="nav-bar-name">
+          <button style={{ all: 'unset', paddingRight: '16px'}} onClick={() => setOpenLogout(true)} >Logout</button>
           Olá, {user.name}
         </div>
       )
@@ -52,6 +56,7 @@ const NavBar = ({
         <div className="nav-content">
           <NavLink className='nav-bar-links' to="/">Home</NavLink>
           <div className="nav-bar-name">
+            <button style={{ all: 'unset', paddingRight: '16px'}} onClick={() => setOpenLogout(true)} >Logout</button>
             Olá, {user.name}
           </div>
         </div>

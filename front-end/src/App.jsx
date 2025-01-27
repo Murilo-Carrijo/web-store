@@ -10,6 +10,7 @@ import { decodeToken } from './utils/token';
 const App = () => {
   const [openLoginForm, setOpenLoginForm] = useState(false);
   const [openRegistrerForm, setOpenRegistrerForm] = useState(false);
+  const [openLogout, setOpenLogout] = useState(false);
   const [user, setUser] = useState('');
   useEffect(() => {
     const fetchUser = async () => {
@@ -38,6 +39,8 @@ const App = () => {
           user={user}
           openRegistrerForm={openRegistrerForm}
           setOpenRegistrerForm={setOpenRegistrerForm}
+          openLogout={openLogout}
+          setOpenLogout={setOpenLogout}
         />
       } />
       <Route path="/favorites" element={
@@ -47,6 +50,8 @@ const App = () => {
           user={user}
           openRegistrerForm={openRegistrerForm}
           setOpenRegistrerForm={setOpenRegistrerForm}
+          openLogout={openLogout}
+          setOpenLogout={setOpenLogout}
         />
       } />
       <Route path="/products/:id" element={
@@ -56,6 +61,8 @@ const App = () => {
           user={user}
           openRegistrerForm={openRegistrerForm}
           setOpenRegistrerForm={setOpenRegistrerForm}
+          openLogout={openLogout}
+          setOpenLogout={setOpenLogout}
         />
       } />
     </Routes>

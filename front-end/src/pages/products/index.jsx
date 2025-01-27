@@ -6,10 +6,17 @@ import NavBar from "../../components/nav-bar";
 import ProductLoading from "../../components/loading-product";
 import LoginForm from "../../components/login-forms";
 import RegisterForms from "../../components/register-forms";
+import Logout from "../../components/logout";
 import './product.css';
 
 const Products = ({
-  openLoginForm, setOpenLoginForm, user, openRegistrerForm, setOpenRegistrerForm
+  openLoginForm,
+  setOpenLoginForm,
+  user,
+  openRegistrerForm,
+  setOpenRegistrerForm,
+  openLogout,
+  setOpenLogout
 }) => {
   const location = useLocation();
   const productId = location.pathname.split('/')[2];
@@ -29,6 +36,8 @@ const Products = ({
         setOpenLoginForm={setOpenLoginForm}
         openRegistrerForm={openRegistrerForm}
         setOpenRegistrerForm={setOpenRegistrerForm}
+        openLogout={openLogout}
+        setOpenLogout={setOpenLogout}
       />
       <LoginForm
         openLoginForm={openLoginForm}
@@ -41,6 +50,10 @@ const Products = ({
         setOpenLoginForm={setOpenLoginForm}
         openRegistrerForm={openRegistrerForm}
         setOpenRegistrerForm={setOpenRegistrerForm}
+      />
+      <Logout
+        openLogout={openLogout}
+        setOpenLogout={setOpenLogout}
       />
       <div className="page">
         {product ? (

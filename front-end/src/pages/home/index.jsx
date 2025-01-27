@@ -6,11 +6,18 @@ import CardContainer from "../../components/card-container";
 import Loading from "../../components/loading";
 import LoginForm from "../../components/login-forms";
 import RegisterForms from "../../components/register-forms";
+import Logout from "../../components/logout";
 import './home.css';
 import Banner from '../../assets/bannerwebstore.png'
 
 const Home = ({
-  openLoginForm, setOpenLoginForm, user, openRegistrerForm, setOpenRegistrerForm
+  openLoginForm,
+  setOpenLoginForm,
+  user,
+  openRegistrerForm,
+  setOpenRegistrerForm,
+  openLogout,
+  setOpenLogout
 }) => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -28,6 +35,8 @@ const Home = ({
         setOpenLoginForm={setOpenLoginForm}
         openRegistrerForm={openRegistrerForm}
         setOpenRegistrerForm={setOpenRegistrerForm}
+        openLogout={openLogout}
+        setOpenLogout={setOpenLogout}
       />
       <LoginForm
         openLoginForm={openLoginForm}
@@ -40,6 +49,10 @@ const Home = ({
         setOpenLoginForm={setOpenLoginForm}
         openRegistrerForm={openRegistrerForm}
         setOpenRegistrerForm={setOpenRegistrerForm}
+      />
+      <Logout
+        openLogout={openLogout}
+        setOpenLogout={setOpenLogout}
       />
       <div className="home">
         <img className="home-image" src={Banner} alt="" />
