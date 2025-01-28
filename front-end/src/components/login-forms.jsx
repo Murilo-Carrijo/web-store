@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
 import './login-forms.css';
 import { authenticate } from '../services/user_services';
+import DefaltContext from '../context/toggleContext';
 
-const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
+const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
+
+  const context = useContext(DefaltContext);
+
+  const { openLoginForm, setOpenLoginForm } = context;
 
   const makeLogin = async (e) => {
     e.preventDefault();

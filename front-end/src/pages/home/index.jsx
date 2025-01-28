@@ -10,15 +10,7 @@ import Logout from "../../components/logout";
 import './home.css';
 import Banner from '../../assets/bannerwebstore.png'
 
-const Home = ({
-  openLoginForm,
-  setOpenLoginForm,
-  user,
-  openRegistrerForm,
-  setOpenRegistrerForm,
-  openLogout,
-  setOpenLogout
-}) => {
+const Home = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
      const fetchProducts = async () => {
@@ -30,34 +22,14 @@ const Home = ({
 
   return (
     <div>
-      <NavBar
-        user={user}
-        setOpenLoginForm={setOpenLoginForm}
-        openRegistrerForm={openRegistrerForm}
-        setOpenRegistrerForm={setOpenRegistrerForm}
-        openLogout={openLogout}
-        setOpenLogout={setOpenLogout}
-      />
-      <LoginForm
-        openLoginForm={openLoginForm}
-        setOpenLoginForm={setOpenLoginForm}
-        openRegistrerForm={openRegistrerForm}
-        setOpenRegistrerForm={setOpenRegistrerForm}
-      />
-      <RegisterForms
-        openLoginForm={openLoginForm}
-        setOpenLoginForm={setOpenLoginForm}
-        openRegistrerForm={openRegistrerForm}
-        setOpenRegistrerForm={setOpenRegistrerForm}
-      />
-      <Logout
-        openLogout={openLogout}
-        setOpenLogout={setOpenLogout}
-      />
+      <NavBar />
+      <LoginForm />
+      <RegisterForms />
+      <Logout />
       <div className="home">
         <img className="home-image" src={Banner} alt="" />
         {products.length === 0 && Array.from({ length: 20 }).map((_, i) => <Loading  key={i} />)}
-        <CardContainer products={products} openLoginForm={openLoginForm} setOpenLoginForm={setOpenLoginForm} />
+        <CardContainer products={products} />
       </div>
     </div>
   )

@@ -1,8 +1,12 @@
-import React from 'react';
+import {  useContext } from 'react';
 import './login-forms.css';
 import { deleteCookie } from '../utils/cookies';
+import DefaltContext from '../context/toggleContext';
 
-const LoginForm = ({ openLogout, setOpenLogout }) => {
+const LoginForm = () => {
+  const context = useContext(DefaltContext);
+  const { openLogout, setOpenLogout } = context;
+
   const logout = () => {
     deleteCookie('token');
     window.location.reload();

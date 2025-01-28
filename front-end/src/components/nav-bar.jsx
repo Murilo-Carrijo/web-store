@@ -1,14 +1,12 @@
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import DefaltContext from '../context/toggleContext';
 import './nav-bar.css';
 
-const NavBar = ({
-  user,
-  setOpenLoginForm,
-  setOpenRegistrerForm,
-  setOpenLogout
-}) => {
+const NavBar = () => {
   const [currentUrl, _setCurrentUrl] = useState(window.location.pathname);
+  const context = useContext(DefaltContext);
+  const { setOpenLoginForm,  setOpenRegistrerForm, setOpenLogout, user } = context;
 
   const checkUser = () => {
     if (!user.isValid) {

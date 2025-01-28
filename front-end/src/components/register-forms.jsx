@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
 import './register-forms.css';
 import { register } from '../services/user_services';
+import DefaltContext from '../context/toggleContext';
 
-const RegisterForms = ({ openRegistrerForm, setOpenRegistrerForm }) => {
+const RegisterForms = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [_verifyPassword, setVerifyPassword] = useState('');
   const [error, setError] = useState({ field: "", message: "", render: false });
+
+  const context = useContext(DefaltContext);
+  const { openRegistrerForm, setOpenRegistrerForm } = context;
 
   const closeModal = () => {
     setOpenRegistrerForm(!openRegistrerForm);

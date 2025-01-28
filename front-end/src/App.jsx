@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import DefaltContext from './context/toggleContext';
 import './App.css';
 import Home from './pages/home';
 import Favorites from './pages/favorites';
@@ -31,41 +32,29 @@ const App = () => {
   }, []);
 
   return (
-    <Routes>
-      <Route path="/" element={
-        <Home
-          openLoginForm={openLoginForm}
-          setOpenLoginForm={setOpenLoginForm}
-          user={user}
-          openRegistrerForm={openRegistrerForm}
-          setOpenRegistrerForm={setOpenRegistrerForm}
-          openLogout={openLogout}
-          setOpenLogout={setOpenLogout}
-        />
-      } />
-      <Route path="/favorites" element={
-        <Favorites
-          openLoginForm={openLoginForm}
-          setOpenLoginForm={setOpenLoginForm}
-          user={user}
-          openRegistrerForm={openRegistrerForm}
-          setOpenRegistrerForm={setOpenRegistrerForm}
-          openLogout={openLogout}
-          setOpenLogout={setOpenLogout}
-        />
-      } />
-      <Route path="/products/:id" element={
-        <Products
-          openLoginForm={openLoginForm}
-          setOpenLoginForm={setOpenLoginForm}
-          user={user}
-          openRegistrerForm={openRegistrerForm}
-          setOpenRegistrerForm={setOpenRegistrerForm}
-          openLogout={openLogout}
-          setOpenLogout={setOpenLogout}
-        />
-      } />
-    </Routes>
+    <DefaltContext.Provider
+      value={{
+        openLoginForm: openLoginForm,
+        setOpenLoginForm: setOpenLoginForm,
+        openRegistrerForm: openRegistrerForm,
+        setOpenRegistrerForm: setOpenRegistrerForm,
+        openLogout: openLogout,
+        setOpenLogout: setOpenLogout,
+        user: user,
+      }}
+    >
+      <Routes>
+        <Route path="/" element={
+          <Home />
+        } />
+        <Route path="/favorites" element={
+          <Favorites />
+        } />
+        <Route path="/products/:id" element={
+          <Products />
+        } />
+      </Routes>
+    </DefaltContext.Provider>
   )
 }
 
