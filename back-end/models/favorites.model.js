@@ -1,71 +1,76 @@
 const database = require("../infra/database");
 
-const createFavorites = async ({values, userId}) => {
-  const queryText = `
-    INSERT INTO favorites (
-      "externalId",
-      title,
-      price,
-      category,
-      description,
-      image,
-      "userId"
-    ) VALUES (
-      $1, $2, $3, $4, $5, $6, $7
-    );
-  `;
+class FavoritesModal {
+  constructor() {
+    this.database = database;
+  }
 
-  const { externalId, title, price, category, description, image } = values;
-  const dbResponse = await database.query({
-    text: queryText,
-    values: [externalId, title, price, category, description, image, userId],
-  });
-  return dbResponse.rows[0];
-};
+  createFavorites = async ({values, userId}) => {
+    const queryText = `
+      INSERT INTO favorites (
+        "externalId",
+        title,
+        price,
+        category,
+        description,
+        image,
+        "userId"
+      ) VALUES (
+        $1, $2, $3, $4, $5, $6, $7
+      );
+    `;
 
-const getFavoritesByUserId = async (userId) => {
-  const queryText = `
-    SELECT * FROM favorites WHERE "userId" = $1;
-  `;
+    const { externalId, title, price, category, description, image } = values;
+    const dbResponse = await this.database.query({
+      text: queryText,
+      values: [externalId, title, price, category, description, image, userId],
+    });
+    return dbResponse.rows[0];
+  };
 
-  const dbResponse = await database.query({
-    text: queryText,
-    values: [userId],
-  });
-  return dbResponse.rows;
-};
+  getFavoritesByUserId = async (userId) => {
+    const queryText = `
+      SELECT * FROM favorites WHERE "userId" = $1;
+    `;
 
-const deleteAllFavoritesByUserId = async (userId) => {
-  const queryText = `
-    DELETE FROM favorites WHERE "userId" = $1;
-  `;
+    const dbResponse = await this.database.query({
+      text: queryText,
+      values: [userId],
+    });
+    return dbResponse.rows;
+  };
 
-  await database.query({
-    text: queryText,
-    values: [userId],
-  });
+  deleteAllFavoritesByUserId = async (userId) => {
+    const queryText = `
+      DELETE FROM favorites WHERE "userId" = $1;
+    `;
 
-  return [];
-};
+    await this.database.query({
+      text: queryText,
+      values: [userId],
+    });
 
-const deleteByFavoriteId = async (userId, favoriteId) => {
-  const queryText = `
-    DELETE FROM favorites WHERE "userId" = $1 AND "id" = $2;
-  `;
+    return [];
+  };
 
-  await database.query({
-    text: queryText,
-    values: [userId, favoriteId],
-  });
+  deleteByFavoriteId = async (userId, favoriteId) => {
+    const queryText = `
+      DELETE FROM favorites WHERE "userId" = $1 AND "id" = $2;
+    `;
 
-  const otherFavorites = await getFavoritesByUserId(userId);
+    await this.database.query({
+      text: queryText,
+      values: [userId, favoriteId],
+    });
 
-  return otherFavorites;
-};
+    const otherFavorites = await this.getFavoritesByUserId(userId);
 
-module.exports = {
-  createFavorites,
-  getFavoritesByUserId,
-  deleteAllFavoritesByUserId,
-  deleteByFavoriteId
+    return otherFavorites;
+  };
 }
+
+
+
+
+
+module.exports = FavoritesModal;

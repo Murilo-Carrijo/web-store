@@ -7,20 +7,19 @@ const app = express();
 const port = process.env.PORT || 3000;
 const statusRoute = require("./routes/status.routes");
 const usersRoute = require("./routes/user.routes");
-const favoritesController = require("./controllers/favorites.controller");
+const favoritesRoute = require("./routes/favorites.routes");
 const authenticateToken = require("./middleware/authorizarion");
 const cors = require("cors");
 
 app.use(express.json());
 app.use(cors());
 
+console.log('cheguei');
+
+
 app.use('/', statusRoute);
 app.use('/', usersRoute);
-
-app.post("/favorites", authenticateToken, favoritesController.createFavorites);
-app.get("/favorites", authenticateToken, favoritesController.getFavoritesByUserId);
-app.delete("/favorites", authenticateToken, favoritesController.deleteAllFavoritesByUserId);
-app.delete("/favorites/:id", authenticateToken, favoritesController.deleteByFavoriteId);
+app.use('/favorites', favoritesRoute);
 
 app.listen(port, (err) => {
   if (err) throw err;
