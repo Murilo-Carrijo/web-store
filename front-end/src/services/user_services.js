@@ -8,12 +8,8 @@ export const authenticate = async (email, password) => {
     body: JSON.stringify({ email, password })
   });
 
-  if (!response.ok) {
-    throw new Error('Error authenticating user');
-  }
-
-  const token = await response.json();
-  return token;
+  const result = await response.json();
+  return result;
 };
 
 export const register = async (name, email, password) => {
@@ -26,10 +22,6 @@ export const register = async (name, email, password) => {
     body: JSON.stringify({ name, email, password })
   });
 
-  if (!response.ok) {
-    throw new Error('Error registering user');
-  }
-
-  const token = await response.json();
-  return token;
+  const result = await response.json();
+  return result;
 }

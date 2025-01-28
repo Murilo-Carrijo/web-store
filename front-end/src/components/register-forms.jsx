@@ -62,13 +62,16 @@ const RegisterForms = ({ openRegistrerForm, setOpenRegistrerForm }) => {
     if (!checkName(name) || !checkEmail(email) || !checkPassword(password) || !checkSecondPassword(_verifyPassword)) {
       return;
     }
-
-    try {
-      await register(name, email, password);
-      alert('Usuário cadastrado com sucesso!');
-    } catch (error) {
-      alert('Erro ao cadastrar usuário.');
+    const result = await register(name, email, password);
+    if (result.message === "User already exists") {
+      setError({ field: "email", message: "Esse e-mail já possui uma conta vinculada.", render: true });
+      return;
     }
+    if (result.message === "User created") {
+      closeModal();
+      alert("Usuário criado com sucesso!");
+    }
+
   };
 
   return (
@@ -89,7 +92,7 @@ const RegisterForms = ({ openRegistrerForm, setOpenRegistrerForm }) => {
             />
             {error.field === "name" && error.render && (
               <div className="error-message">
-                <p>{error.message}</p>
+                <span>{error.message}</span>
               </div>
             )}
           </div>
@@ -106,7 +109,7 @@ const RegisterForms = ({ openRegistrerForm, setOpenRegistrerForm }) => {
             />
             {error.field === "email" && error.render && (
               <div className="error-message">
-                <p>{error.message}</p>
+                <span>{error.message}</span>
               </div>
             )}
           </div>
@@ -121,7 +124,7 @@ const RegisterForms = ({ openRegistrerForm, setOpenRegistrerForm }) => {
               required />
             {error.field === "password" && error.render && (
               <div className="error-message">
-                <p>{error.message}</p>
+                <span>{error.message}</span>
               </div>
             )}
           </div>
@@ -136,12 +139,12 @@ const RegisterForms = ({ openRegistrerForm, setOpenRegistrerForm }) => {
               required />
             {error.field === "checkPass" && error.render && (
               <div className="error-message">
-                <p>{error.message}</p>
+                <s>{error.message}</s>
               </div>
             )}
           </div>
           <button
-            type="submit"
+            type="button"
             onClick={registerUser}
             className="login-button">
             Criar conta

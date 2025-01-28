@@ -10,13 +10,13 @@ const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
   const makeLogin = async (e) => {
     e.preventDefault();
     setError(false);
-    try {
-      const token = await authenticate(email, password);
+    const token = await authenticate(email, password);
+    if (token.message) {
+      setError(true);
+      return;
+    } else {
       document.cookie = `token=${token.token}`;
       window.location.reload();
-    } catch (error) {
-      setError(true);
-      console.error(error);
     }
   };
   const closeModal = () => {
@@ -47,7 +47,7 @@ const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
           </div>
             {error && (
             <div className="error-message">
-              <p>Erro ao fazer login. Por favor, verifique suas credenciais e tente novamente.</p>
+              <span>Erro ao fazer login. Por favor, verifique suas credenciais e tente novamente.</span>
             </div>
             )}
           <button
