@@ -29,7 +29,6 @@ class FavoritesService {
 
   getFavoritesByUserId = async (userId) => {
     const favoriteList = await this.modal.getFavoritesByUserId(userId);
-    if (favoriteList.length === 0) throw new Error('The user does not have favorites');
     return favoriteList;
   };
 
