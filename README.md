@@ -8,18 +8,18 @@ O projeto consiste em uma aplicação fullstack onde o banco de dados escolhido 
 
 ### Lista de tecnologias
 
-- Node.js
-- React.js
-- Docker Compose
-- PostgreSQL
+- Node.js (back-end)
+- React.js (front-end)
+- Docker e Docker Compose (imagem do banco de dados)
+- PostgreSQL (banco de dados)
 
 ---
 
 ### Habilidades utilizadas
 
-- Criar CRUD utilizando Node.js para gerenciar requisições a um banco de dados PostgreSQL;
+- Deenvolver uma API que gerencie tanto o cadastro de usuários quanto os itens favoritados.
 - Criar uma aplicação web utilizando React.js;
-- Integrar o front-end com duas APIs, sendo uma de terceiros (responsável pelos produtos) e outra própria (responsável pelos favoritos e usuários).
+- Integrar o front-end com duas APIs, sendo uma de terceiros (responsável pelos produtos) e outra própria mencionada anteriormente.
 
 ---
 
@@ -43,12 +43,21 @@ Obs.: Os comandos abaixo devem ser executados no terminal do seu computador.
 
 3. Rodando o projeto
 
+- Pré requisitos para rodar o projeto:
+
+  - A maquina que irá rodar essa aplicação deve ter instalado o `Docker, Docker Compose e Node.js`
+  - Para que os comandos abaixo funcionem é necessaŕio que sejam executados em um terminal `bash`
+  - Para facilitar o processo de colocar o projeto para roda o arquivo `.env` não foi ocultado.
+
 - O primeiro passo é subir o banco de dados e o back-end. O comando abaixo realiza esses dois procedimentos:
   `cd back-end && npm run dev`. Caso já esteja dentro da pasta back-end, basta executar `npm run dev`.
+
 - O próximo passo é criar as tabelas dentro do banco de dados. Para isso, abra um novo terminal, verifique em qual diretório você está e:
-  Caso esteja no diretório back-end, execute o comando `npm run migration:up`. Caso esteja na raiz do projeto, execute `cd back-end && npm run migration:up`.
+  Caso esteja no diretório back-end, execute o comando `npm run migration:up`. Caso esteja na raiz do projeto, execute `cd back-end && npm run migration:up && cd ..`.
+
 - Vamos aproveitar o terminal que utilizamos para criar as tabelas para rodar o front-end:
-  Caso o novo terminal abra dentro da pasta back-end, execute `cd .. && cd front-end && npm run dev`. Caso você esteja na raiz do projeto, execute `cd front-end && npm run dev` e, caso você esteja na pasta front-end, execute `npm run dev`.
+  Caso o novo terminal abra dentro da pasta back-end, execute `cd front-end && npm run dev`. Caso você esteja na raiz do projeto, execute `cd front-end && npm run dev` e, caso você esteja na pasta front-end, execute `npm run dev`.
+
 - Após os passos acima, o seu navegador padrão deverá abrir uma nova página no endereço `http://localhost:5173/`.
 
 ![image](home.jpeg)
@@ -89,4 +98,4 @@ Devido ao tempo e às priorizações, optei por criar testes de integração par
 
 #### Como rodar os testes do back-end
 
-Execute o comando `npm run test` dentro do diretório back-end e os testes serão executados.
+Execute o comando `npm run test` ou `npm run test:watch` dentro do diretório back-end e os testes serão executados.
