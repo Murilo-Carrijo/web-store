@@ -25,6 +25,7 @@ O projeto consiste em uma aplicação fullstack onde o banco de dados escolhido 
 
 ### Como rodar o projeto
 
+Para rodar esse projeto é necessário ter o `Node.js`, `docker` e `docker compose`.
 Obs.: Os comandos abaixo devem ser executados no terminal do seu computador.
 
 1. Clone o repositório
