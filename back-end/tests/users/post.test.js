@@ -1,4 +1,4 @@
-const database = require("../setup");
+const UserModal = require("../../models/users.model");
 
 describe("POST /user/create", () => {
   test("POST to /user/create returns 400 senha vazia", async () => {
@@ -74,6 +74,12 @@ describe("POST /user/create", () => {
   });
 
   test("POST to /user/create returns 201 ao criar um usuário", async () => {
+    // Limpa o banco de dados
+    const modal = new UserModal();
+    const user = await modal.getByEmail("teste@teste.com");
+    if (user) {
+      await modal.deleteUserById(user.id);
+    }
     const response = await fetch("http://localhost:3000/user/create", {
       method: "POST",
       headers: {
@@ -197,26 +203,4 @@ describe("POST users", () => {
     const result = JSON.parse(await response.text());
     expect(result.message).toBe("The password must be at least 6 characters");
   });
-
-  test("clean", async () => {
-    const fav = await fetch("http://localhost:3000/favorites", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      }
-    });
-
-    expect(fav.status).toBe(400);
-
-    const user = await fetch("http://localhost:3000/user/delete", {
-      method: "DELETE",
-      headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
-      },
-    });
-
-    expect(user.status).toBe(200);
-  })
 });
