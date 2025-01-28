@@ -8,6 +8,11 @@ export const addFavorites = async (product, token) => {
     image: product.image,
   };
 
+  const result = {
+    status: 'success',
+    message: 'Produto adicionado aos favoritos',
+  }
+
   const response = await fetch('http://localhost:3000/favorites', {
     method: 'POST',
     headers: {
@@ -18,10 +23,11 @@ export const addFavorites = async (product, token) => {
   });
 
   if (!response.ok) {
-    throw new Error('Error registering favorites');
+    result.status = 'error';
+    result.message = 'Erro ao adicionar produto aos favoritos';
   }
 
-  return alert('Produto adicionado aos favoritos');
+  return result;
 };
 
 export const getFavorites = async (token) => {
@@ -60,7 +66,6 @@ export const deleteByFavoriteId = async (token, id) => {
 export const checkFavorites = async (token, product) => {
   const favoritesList = await getFavorites(token);
 
-  console.log('favoritesList:', favoritesList);
   const result = {
     status: 'success',
     message: 'Produto adicionado aos favoritos',
