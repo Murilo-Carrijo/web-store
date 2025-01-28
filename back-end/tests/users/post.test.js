@@ -55,6 +55,78 @@ describe("POST /user/create", () => {
     expect(result.message).toBe("Missing parameters");
   });
 
+  test("POST to /user/create returns 400 e-mail invalido teste", async () => {
+    const response = await fetch("http://localhost:3000/user/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "teste",
+        email: "teste",
+        password: 'password123',
+      }),
+    });
+
+    expect(response.status).toBe(400);
+    const result = JSON.parse(await response.text());
+    expect(result.message).toBe("This email is invalid");
+  });
+
+  test("POST to /user/create returns 400 e-mail invalido teste@", async () => {
+    const response = await fetch("http://localhost:3000/user/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "teste",
+        email: "teste@",
+        password: 'password123',
+      }),
+    });
+
+    expect(response.status).toBe(400);
+    const result = JSON.parse(await response.text());
+    expect(result.message).toBe("This email is invalid");
+  });
+
+  test("POST to /user/create returns 400 e-mail invalido teste@test", async () => {
+    const response = await fetch("http://localhost:3000/user/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "teste",
+        email: "teste@test",
+        password: 'password123',
+      }),
+    });
+
+    expect(response.status).toBe(400);
+    const result = JSON.parse(await response.text());
+    expect(result.message).toBe("This email is invalid");
+  });
+
+  test("POST to /user/create returns 400 e-mail invalido teste.com", async () => {
+    const response = await fetch("http://localhost:3000/user/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "teste",
+        email: "teste.com",
+        password: 'password123',
+      }),
+    });
+
+    expect(response.status).toBe(400);
+    const result = JSON.parse(await response.text());
+    expect(result.message).toBe("This email is invalid");
+  });
+
   test("POST to /user/create returns 400 se o usuário não enviar o name", async () => {
     const response = await fetch("http://localhost:3000/user/create", {
       method: "POST",
