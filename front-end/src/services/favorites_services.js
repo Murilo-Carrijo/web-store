@@ -46,8 +46,6 @@ export const getFavorites = async (token) => {
 };
 
 export const deleteByFavoriteId = async (token, id) => {
-  console.log('id:', id);
-
   const response = await fetch(`http://localhost:3000/favorites/${id}`, {
     method: 'DELETE',
     headers: {
@@ -79,7 +77,6 @@ export const checkFavorites = async (token, product) => {
 
   favoritesList.forEach((favorite) => {
     if (Number(favorite.externalId) === product.id) {
-      console.log('favorite:', favorite.externalId);
       result.status = 'error';
       result.message = 'Você gostou mesmo desse produto, hein? 😏 Ele ja está na sua lista de favoritos 😉';
     }

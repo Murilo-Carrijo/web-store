@@ -1,5 +1,4 @@
 export const authenticate = async (email, password) => {
-  console.log(email, password);
   const response = await fetch('http://localhost:3000/login', {
     method: 'POST',
     headers: {
@@ -13,7 +12,6 @@ export const authenticate = async (email, password) => {
 };
 
 export const register = async (name, email, password) => {
-  console.log(email, password);
   const response = await fetch('http://localhost:3000/user/create', {
     method: 'POST',
     headers: {

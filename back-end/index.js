@@ -14,9 +14,6 @@ const cors = require("cors");
 app.use(express.json());
 app.use(cors());
 
-console.log('cheguei');
-
-
 app.use('/', statusRoute);
 app.use('/', usersRoute);
 app.use('/favorites', favoritesRoute);

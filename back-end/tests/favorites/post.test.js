@@ -220,8 +220,7 @@ describe("POST /favorites", () => {
     });
 
     expect(response.status).toBe(400);
-     const result = JSON.parse(await response.text());
-     console.log('result', result);
+    const result = JSON.parse(await response.text());
     expect(result.message).toBe("The element already exist");
 
     await fetch("http://localhost:3000/favorites", {
