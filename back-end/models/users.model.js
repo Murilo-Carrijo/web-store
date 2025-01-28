@@ -1,43 +1,48 @@
 const database = require("../infra/database");
 const favoritesModel = require("./favorites.model");
 
-const createUser = async (email, password, name) => {
-  const dbResponse = await database.query({
-    text: "INSERT INTO users (email, password, name) VALUES ($1, $2, $3) RETURNING *;",
-    values: [email, password, name],
-  });
-  return dbResponse.rows[0];
-};
+class UserModal {
+  constructor() {
+    this.database = database;
+    this.favoritesModel = favoritesModel;
+  }
 
-const getByEmail = async (email) => {
-  const dbResponse = await database.query({
-    text: "SELECT * FROM users WHERE email = $1;",
-    values: [email],
-  });
-  return dbResponse.rows[0];
-};
+  createUser = async (email, password, name) => {
+    const dbResponse = await this.database.query({
+      text: "INSERT INTO users (email, password, name) VALUES ($1, $2, $3) RETURNING *;",
+      values: [email, password, name],
+    });
+    return dbResponse.rows[0];
+  };
 
-const login = async (email, password) => {
-  const dbResponse = await database.query({
-    text: "SELECT * FROM users WHERE email = $1 AND password = $2;",
-    values: [email, password],
-  });
-  return dbResponse.rows[0];
-};
+  getByEmail = async (email) => {
+    const dbResponse = await this.database.query({
+      text: "SELECT * FROM users WHERE email = $1;",
+      values: [email],
+    });
+    return dbResponse.rows[0];
+  };
 
-const deleteUserById = async (id) => {
-  favoritesModel.deleteAllFavoritesByUserId(id);
-  await database.query({
-    text: "DELETE FROM users WHERE id = $1;",
-    values: [id],
-  });
+  login = async (email, password) => {
+    const dbResponse = await this.database.query({
+      text: "SELECT * FROM users WHERE email = $1 AND password = $2;",
+      values: [email, password],
+    });
+    return dbResponse.rows[0];
+  };
 
-  return true;
-};
+  deleteUserById = async (id) => {
+    this.favoritesModel.deleteAllFavoritesByUserId(id);
+    await this.database.query({
+      text: "DELETE FROM users WHERE id = $1;",
+      values: [id],
+    });
 
-module.exports = {
-  createUser,
-  getByEmail,
-  login,
-  deleteUserById
-};
+    return true;
+  };
+}
+
+
+
+
+module.exports = UserModal;

@@ -6,7 +6,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 const statusRoute = require("./routes/status.routes");
-const usersController = require("./controllers/users.controller");
+const usersRoute = require("./routes/user.routes");
 const favoritesController = require("./controllers/favorites.controller");
 const authenticateToken = require("./middleware/authorizarion");
 const cors = require("cors");
@@ -15,10 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/', statusRoute);
-
-app.post("/user/create", usersController.createUser);
-app.post("/login", usersController.login);
-app.delete("/user/delete", authenticateToken, usersController.deleteUserById);
+app.use('/', usersRoute);
 
 app.post("/favorites", authenticateToken, favoritesController.createFavorites);
 app.get("/favorites", authenticateToken, favoritesController.getFavoritesByUserId);
