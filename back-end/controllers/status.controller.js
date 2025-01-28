@@ -1,8 +1,14 @@
-const statusService = require("../services/status.service");
+const StatusService = require('../services/status.service');
 
-const statusController = async (req, res) => {
-  const status = await statusService();
-  return res.status(200).json(status);
+class StatusController {
+  constructor() {
+    this.statusService = new StatusService();
+  }
+
+  getStatus = async (_req, res) => {
+    const status = await this.statusService.getStatus();
+    return res.status(200).json(status);
+  }
 }
 
-module.exports = statusController;
+module.exports = StatusController;

@@ -5,7 +5,7 @@ require("dotenv").config({
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
-const statusController = require("./controllers/status.controller");
+const statusRoute = require("./routes/status.routes");
 const usersController = require("./controllers/users.controller");
 const favoritesController = require("./controllers/favorites.controller");
 const authenticateToken = require("./middleware/authorizarion");
@@ -14,7 +14,7 @@ const cors = require("cors");
 app.use(express.json());
 app.use(cors());
 
-app.get("/status", statusController);
+app.use('/', statusRoute);
 
 app.post("/user/create", usersController.createUser);
 app.post("/login", usersController.login);

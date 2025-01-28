@@ -1,7 +1,15 @@
-const statusModal = require("../models/status.model");
+const StatusModal = require("../models/status.model");
 
-const statusService = async () => {
-  return await statusModal();
+class StatusService {
+  constructor() {
+    this.modal = new StatusModal();
+  }
+
+
+  getStatus = async () => {
+    return await this.modal.getDbStatus();
+  }
 }
 
-module.exports = statusService;
+
+module.exports = StatusService;
