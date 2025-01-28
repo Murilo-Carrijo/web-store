@@ -1,10 +1,10 @@
 const database = require("../infra/database");
-const favoritesModel = require("./favorites.model");
+const FavoritesModal = require("./favorites.model");
 
 class UserModal {
   constructor() {
     this.database = database;
-    this.favoritesModel = favoritesModel;
+    this.favoritesModel = new FavoritesModal();
   }
 
   createUser = async (email, password, name) => {
