@@ -75,12 +75,15 @@ export const checkFavorites = async (token, product) => {
     result.message = 'Limite de favoritos atingido 😕';
   }
 
-  favoritesList.forEach((favorite) => {
+  for (let index = 0; index < favoritesList.length; index++) {
+    const favorite = favoritesList[index];
     if (Number(favorite.externalId) === product.id) {
+      await deleteByFavoriteId(token, favorite.id);
       result.status = 'error';
-      result.message = 'Você gostou mesmo desse produto, hein? 😏 Ele ja está na sua lista de favoritos 😉';
+      result.message = 'Produto removido com sucesso!';
+      break;
     }
-  });
+  }
 
   return result;
 };
