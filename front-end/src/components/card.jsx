@@ -1,10 +1,14 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { getCookie } from '../utils/cookies';
 import { decodeToken } from '../utils/token';
 import { addFavorites, checkFavorites, deleteByFavoriteId } from '../services/favorites_services';
+import DefaltContext from '../context/toggleContext';
 import './card.css';
 
-const Card = ({ product, openLoginForm, setOpenLoginForm }) => {
+const Card = ({ product }) => {
+  const context = useContext(DefaltContext);
+  const { openLoginForm, setOpenLoginForm } = context;
   const validateToken = () => {
     const token = getCookie('token');
     if (!token) {
