@@ -17,7 +17,7 @@ O projeto consiste em uma aplicação fullstack onde o banco de dados escolhido 
 
 ### Habilidades utilizadas
 
-- Deenvolver uma API que gerencie tanto o cadastro de usuários quanto os itens favoritados.
+- Desenvolver uma API que gerencie tanto o cadastro de usuários quanto os itens favoritados.
 - Criar uma aplicação web utilizando React.js;
 - Integrar o front-end com duas APIs, sendo uma de terceiros (responsável pelos produtos) e outra própria mencionada anteriormente.
 
@@ -43,11 +43,11 @@ Obs.: Os comandos abaixo devem ser executados no terminal do seu computador.
 
 3. Rodando o projeto
 
-- Pré requisitos para rodar o projeto:
+- Pré-requisitos para rodar o projeto:
 
-  - A maquina que irá rodar essa aplicação deve ter instalado o `Docker, Docker Compose e Node.js`
-  - Para que os comandos abaixo funcionem é necessaŕio que sejam executados em um terminal `bash`
-  - Para facilitar o processo de colocar o projeto para roda o arquivo `.env` não foi ocultado.
+  - A máquina que irá rodar essa aplicação deve ter instalada o `Docker, Docker Compose e Node.js`
+  - Para que os comandos abaixo funcionem é necessário que sejam executados em um terminal `bash`
+  - Para facilitar o processo de colocar o projeto para rodar o arquivo `.env` não foi ocultado.
 
 - O primeiro passo é subir o banco de dados e o back-end. O comando abaixo realiza esses dois procedimentos:
   `cd back-end && npm run dev`. Caso já esteja dentro da pasta back-end, basta executar `npm run dev`.
