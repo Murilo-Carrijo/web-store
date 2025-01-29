@@ -9,16 +9,40 @@ import RegisterForms from "../../components/register-forms";
 import Logout from "../../components/logout";
 import './home.css';
 import Banner from '../../assets/bannerwebstore.png'
+import { getCookie } from "../../utils/cookies";
+import { decodeToken } from "../../utils/token";
+import { getFavorites } from "../../services/favorites_services";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [checkProduct, setCheckProduct] = useState([]);
   useEffect(() => {
+    const token = getCookie('token');
      const fetchProducts = async () => {
       const products = await getAllProducts();
        setProducts(products);
     }
     fetchProducts();
-  }, []);
+    fetchUser(token);
+    Selectex(token);
+  }, [checkProduct]);
+
+  const fetchUser = async (token) => {
+    if (token) {
+      const userInfos = decodeToken(token);
+      if (!userInfos) {
+        setOpenLoginForm(true);
+      }
+    } else {
+      setOpenLoginForm(true);
+    }
+  }
+
+  const Selectex = async (token) => {
+    const favorites = await getFavorites(token);
+    const prod = favorites.map((favorite) => favorite.externalId);
+    setCheckProduct(prod)
+  }
 
   return (
     <div>
@@ -29,7 +53,7 @@ const Home = () => {
       <div className="home">
         <img className="home-image" src={Banner} alt="" />
         {products.length === 0 && Array.from({ length: 20 }).map((_, i) => <Loading  key={i} />)}
-        <CardContainer products={products} />
+        <CardContainer products={products} checkProduct={checkProduct} />
       </div>
     </div>
   )

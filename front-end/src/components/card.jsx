@@ -6,9 +6,10 @@ import { addFavorites, checkFavorites, deleteByFavoriteId } from '../services/fa
 import DefaltContext from '../context/toggleContext';
 import './card.css';
 
-const Card = ({ product }) => {
+const Card = ({ product, checkProduct }) => {
   const context = useContext(DefaltContext);
   const { openLoginForm, setOpenLoginForm } = context;
+
   const validateToken = () => {
     const token = getCookie('token');
     if (!token) {
@@ -30,14 +31,13 @@ const Card = ({ product }) => {
     } else {
       const result = await addFavorites(product, token);
       return alert(result.message);
-
     }
   };
 
   const removeFromFavorites = async (product) => {
     const token = getCookie('token');
     await deleteByFavoriteId(token, product.id);
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (
@@ -78,8 +78,12 @@ const Card = ({ product }) => {
               <button
                 style={{ all: 'unset' }}
                 onClick={() => setFavorite(product)}
-              >
-                <i className="fa-solid fa-star start" ></i>
+                >
+                  {checkProduct && checkProduct.includes((product.id.toString())) ? (
+                    <i className="fa-solid fa-star start-select" ></i>
+                  ) : (
+                    <i className="fa-solid fa-star start" ></i>
+                  )}
               </button>
             )}
           </div>

@@ -52,6 +52,10 @@
   gap: 10px;
 }
 
-.start {
+.start-select {
   color: #fbb913;
+}
+
+.start {
+  color: #727272;
 }
