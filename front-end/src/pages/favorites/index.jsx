@@ -31,7 +31,7 @@ const Favorites = () => {
     }
     fetchUser();
     fetchFavorites(cookieToken);
-  }, []);
+  }, [products]);
 
   return (
     <div>
